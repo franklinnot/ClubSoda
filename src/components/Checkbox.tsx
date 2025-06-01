@@ -1,4 +1,9 @@
-export default function Checkbox({ className = '', ...props }) {
+import React from "react";
+
+export default function Checkbox({
+    className = '',
+    ...props
+}: React.InputHTMLAttributes<HTMLInputElement>) {
     return (
         <input
             {...props}
