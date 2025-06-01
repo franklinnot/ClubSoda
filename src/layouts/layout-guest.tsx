@@ -1,4 +1,4 @@
-import type { ILayoutProps } from "./ILayout";
+import type { ILayoutProps } from "../utils/interfaces/ILayout";
 import { useEffect } from "react";
 
 export default function LayoutGuest({
