@@ -11,7 +11,7 @@ interface ApplicationLogoProps extends React.ImgHTMLAttributes<HTMLImageElement>
 export default function ApplicationLogo({ className = '', ...props }: ApplicationLogoProps) {
   return (
     <img
-      src="/public/logo.svg"
+      src="/logo.svg"
       alt="San Jorge Logo"
       className={className}
       {...props}
