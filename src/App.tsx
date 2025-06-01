@@ -7,6 +7,7 @@ import PurchaseNew from "./pages/purchases/purchase-new";
 import PurchaseHistory from "./pages/purchases/purchase-history";
 import RequestNew from "./pages/requests/request-new";
 import RequestHistory from "./pages/requests/request-history";
+import "./App.css";
 
 export default function App() {
   return (
