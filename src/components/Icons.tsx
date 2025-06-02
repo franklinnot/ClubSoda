@@ -210,3 +210,21 @@ export const IconSearch = (props: IIconProps) => (
     />
   </Icon>
 );
+
+export const IconPlus = (props: IIconProps) => (
+  <Icon {...props} fill="none" stroke="currentColor">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 4.5v15m7.5-7.5h-15" />
+  </Icon>
+);
+
+export const IconMinus = (props: IIconProps) => (
+  <Icon {...props} fill="none" stroke="currentColor">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M5 12h14" />
+  </Icon>
+);
