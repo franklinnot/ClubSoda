@@ -1,13 +1,13 @@
 import React from "react";
 
 interface IIconProps {
-    children?: React.ReactNode;
-    size?: number | string;
-    strokeWidth?: number;
-    className?: string;
-    fill?: string;
-    stroke?: string;
-    style?: React.CSSProperties;
+  children?: React.ReactNode;
+  size?: number | string;
+  strokeWidth?: number;
+  className?: string;
+  fill?: string;
+  stroke?: string;
+  style?: React.CSSProperties;
 }
 
 // Reusable icon base component
@@ -51,13 +51,13 @@ const Icon = React.forwardRef(
 Icon.displayName = "Icon";
 
 export const ArrowDown = (props: IIconProps) => (
-    <Icon {...props}>
-        <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-        />
-    </Icon>
+  <Icon {...props}>
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+    />
+  </Icon>
 );
 
 export const ArrowUp = (props: IIconProps) => (
@@ -197,6 +197,16 @@ export const IconDocumentCheck = (props: IIconProps) => (
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12"
+    />
+  </Icon>
+);
+
+export const IconSearch = (props: IIconProps) => (
+  <Icon {...props} fill="none" stroke="currentColor">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
     />
   </Icon>
 );
