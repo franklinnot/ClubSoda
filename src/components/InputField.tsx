@@ -1,6 +1,20 @@
-import InputError from "@/Components/InputError";
-import TextInput from "@/Components/TextInput";
-import InputLabel from "@/Components/InputLabel";
+import React from "react";
+import InputLabel from "./InputLabel";
+import TextInput from "./TextInput";
+
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    className?: string;
+    id: string;
+    label: string;
+    value: string | number;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    error?: string;
+    isFocused?: boolean;
+    required?: boolean;
+    placeholder?: string;
+    disabled?: boolean;
+    maxLength?: number;
+}
 
 export default function InputField({
     className = "",
@@ -16,8 +30,8 @@ export default function InputField({
     placeholder = "",
     disabled = false,
     maxLength = 255,
-    ...props // Spread additional props
-}) {
+    ...props
+}: InputFieldProps) {
     return (
         <div className={className}>
             <InputLabel htmlFor={id} value={label} />
@@ -33,13 +47,13 @@ export default function InputField({
                 onChange={onChange}
                 required={required}
                 placeholder={placeholder}
-                error={error}
+                error={!!error}
                 disabled={disabled}
-                maxLength = {maxLength}
-                {...props} // Spread additional props to TextInput
+                maxLength={maxLength}
+                {...props}
             />
 
-            <InputError message={error} className="mt-2" />
+            {/* <InputError message={error} className="mt-2" /> */}
         </div>
     );
 }
