@@ -28,7 +28,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             if (isFocused && inputRef.current) {
                 inputRef.current.focus();
             }
-        }, [isFocused]);
+        }, [isFocused, inputRef]);
 
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const { value } = e.target;
@@ -53,7 +53,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
                 {...props}
                 value={value}
                 type={inputType}
-                className={`focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm  
+                className={`w-full px-3 py-2 border rounded-md text-sm transition-all duration-200
+                        placeholder-[#979797] focus:outline-none focus:ring-1 focus:ring-[#CDCDCD] focus:border-[#CDCDCD]  
                     ${className} 
                     ${disabled ? "opacity-70 cursor-not-allowed bg-gray-100" : ""}
                     ${error ? "border-red-500" : "border-gray-300"}
