@@ -1,12 +1,13 @@
 import PurchaseItem, { type PurchaseItemProps } from "../pages/purchases/purchase-history/PurchaseItem";
+import RequestItem, { type RequestItemProps } from "../pages/requests/request-history/RequestItem";
 
 interface HistorySidebarProps {
     title: string;
     purchases?: PurchaseItemProps[];
-    query?: [];
+    requests?: RequestItemProps[];
 }
 
-export default function HistorySidebar({ title, purchases }: HistorySidebarProps) {
+export default function HistorySidebar({ title, purchases, requests }: HistorySidebarProps) {
 
 
     return (
@@ -25,6 +26,9 @@ export default function HistorySidebar({ title, purchases }: HistorySidebarProps
             </h2>
             {purchases?.map((p) => (
                 <PurchaseItem key={p.id} {...p} />
+            ))}
+            {requests?.map((req) => (
+                <RequestItem key={req.id} {...req} />
             ))}
         </aside>
     );

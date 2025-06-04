@@ -37,7 +37,7 @@ export const purchases = [
     {
         id: "125",
         total: "PEN S/. 100.50",
-        estado: "En progreso" as const,
+        estado: "Cancelado" as const,
         fecha: "2025-06-01",
         productos: [
             {

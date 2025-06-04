@@ -6,7 +6,7 @@ import ProductsCatalog from "./pages/products-catalog";
 import PurchaseNew from "./pages/purchases/purchase-new";
 import PurchaseHistory from "./pages/purchases/purchase-history/purchase-history";
 import RequestNew from "./pages/requests/request-new";
-import RequestHistory from "./pages/requests/request-history";
+import RequestHistory from "./pages/requests/request-history/request-history";
 import "./App.css";
 
 export default function App() {

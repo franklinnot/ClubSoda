@@ -11,6 +11,7 @@ export default function PurchaseHistory() {
   return (
     <LayoutAuth title="Historial de compras">
       <div className="w-full max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-4 h-[calc(100vh-96px)] relative">
+        {/* Sidebar de historial */}
         <HistorySidebar
           title="Historial de compras"
           purchases={purchases.map((p) => ({
@@ -21,8 +22,8 @@ export default function PurchaseHistory() {
           }))}
         />
 
+        {/* Detalle de compra */}
         {compraActiva && (
-          
           <PurchaseDetail
             id={compraActiva.id}
             productos={compraActiva.productos}
