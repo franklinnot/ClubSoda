@@ -4,7 +4,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import ProductsCatalog from "./pages/products-catalog";
 import PurchaseNew from "./pages/purchases/purchase-new";
-import PurchaseHistory from "./pages/purchases/purchase-history";
+import PurchaseHistory from "./pages/purchases/purchase-history/purchase-history";
 import RequestNew from "./pages/requests/request-new";
 import RequestHistory from "./pages/requests/request-history";
 import "./App.css";
