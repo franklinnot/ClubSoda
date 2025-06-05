@@ -12,7 +12,7 @@ export default function LayoutAuth({
     document.title = title ? `${title} - San Jorge` : "San Jorge";
   }, [title]);
   return (
-    <div className={`flex min-h-dvh flex-col ${className}`}>
+    <div className={`flex min-h-dvh flex-col overflow-x-hidden ${className}`}>
       <Header title={title} user={user} className="" />
       <main className="flex flex-col flex-1 justify-center items-center">
         {children}
