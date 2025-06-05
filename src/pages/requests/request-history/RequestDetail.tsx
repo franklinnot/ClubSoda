@@ -1,6 +1,7 @@
 import InputField from "../../../components/InputField";
-import { IconCheckCircle, IconClock, IconCloseCircle, IconInformation } from "../../../components/Icons";
+import { IconCheckCircle, IconClock, IconCloseCircle, IconInformation, IconPlus } from "../../../components/Icons";
 import type { JSX } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface RequestDetailProps {
     id: string;
@@ -31,24 +32,36 @@ export default function RequestDetail({
     respuesta = "",
     onClose,
 }: RequestDetailProps): JSX.Element {
+    const navigate = useNavigate();
+
     return (
         <section
             className={`
-        flex-1 h-full flex flex-col text-[#4a4848] overflow-y-auto
-        fixed inset-0 bg-white z-50 p-4 shadow-xl
-        md:static md:p-0 md:shadow-none md:px-2
-      `}
+                flex-1 h-full flex flex-col text-[#4a4848] overflow-y-auto
+                fixed inset-0 bg-white z-50 md:z-10 p-4 shadow-xl
+                md:static md:p-0 md:shadow-none md:px-2
+            `}
         >
             {/* Encabezado */}
-            <div className="mb-4">
-                <div className="flex justify-between items-center">
-                    <h3 className="text-md font-semibold flex items-center gap-2">
-                        <span>#{id}</span>
-                        <span className="inline-flex items-center gap-1 text-sm font-medium">
-                            {estadoIcons[estado]}
-                            <span className={estadoColors[estado]}>{estado}</span>
-                        </span>
-                    </h3>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="text-md font-semibold flex items-center gap-2 flex-1 min-w-0">
+                    <span className="truncate">#{id}</span>
+                    <span className="inline-flex items-center gap-1 text-sm font-medium flex-shrink-0">
+                        {estadoIcons[estado]}
+                        <span className={estadoColors[estado]}>{estado}</span>
+                    </span>
+                </h3>
+
+                <div className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                        onClick={() => navigate('/request/new')}
+                        className="flex items-center gap-1 border border-red-500 text-red-500 
+                        rounded px-2.5 py-1.5 hover:bg-red-500 hover:text-white 
+                        transition-colors font-semibold text-sm"
+                    >
+                        <IconPlus className="w-4 h-4" />
+                        <span className="whitespace-nowrap">Nueva Consulta</span>
+                    </button>
 
                     {onClose && (
                         <button

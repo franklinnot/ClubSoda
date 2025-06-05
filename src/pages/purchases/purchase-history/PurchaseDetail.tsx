@@ -35,7 +35,7 @@ export default function PurchaseDetail({
     <section
       className={`
         flex-1 h-full flex flex-col text-[#4a4848] overflow-y-auto
-        fixed inset-0 bg-white z-50 p-4 shadow-xl
+        fixed inset-0 bg-white z-50 md:z-10 p-4 shadow-xl
         md:static md:p-0 md:shadow-none md:px-2
       `}
     >
