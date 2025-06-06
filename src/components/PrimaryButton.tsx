@@ -4,6 +4,7 @@ interface IProps {
   className?: string;
   disabled?: boolean;
   children?: React.ReactNode;
+  onClick?: ()=>void
 }
 
 export default function PrimaryButton({

@@ -5,6 +5,7 @@ const routes = [
   { title: "Favoritos", route: "/favorites" },
   { title: "Compras", route: "/purchase/history" },
   { title: "Consultas", route: "/request/history" },
+  { tittle: "Pago", route: "/Pago"}
 ];
 
 export default function getRoutes(){
