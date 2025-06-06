@@ -86,7 +86,7 @@ return (
                 max={300}
                 value={maxPrecio}
                 onChange={(e)=> setMaxPrecio(Number(e.target.value))}
-                className="pl-5 w-16 border rounded p-1"
+                className="pl-5 w-17 border rounded p-1"
 
             />
         </div>
