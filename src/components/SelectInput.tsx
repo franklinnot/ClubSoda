@@ -10,7 +10,7 @@ import {
 
 // Define the type for individual items in the select list
 interface Item {
-  id: string | number;
+  id: string;
   name: string;
 }
 
@@ -75,7 +75,7 @@ export default function SelectInput({
   const displayValue = (item: Item | null) => (item ? item.name : ""); // Typed function parameter
 
   const baseOptionsContainerClasses =
-    "mt-1 max-h-60 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none empty:hidden";
+    "mt-1.5 max-h-60 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-gray-300 ring-opacity-5 focus:outline-none empty:hidden";
   const baseOptionClasses =
     "relative cursor-default select-none py-2 px-4 text-gray-600 data-[focus]:bg-indigo-100";
 
@@ -90,12 +90,12 @@ export default function SelectInput({
         {(
           { open }: { open: boolean } // Typed render prop parameter
         ) => (
-          <>
+          <div>
             <div className="relative" ref={inputRef}>
               <ComboboxInput
                 ref={comboboxInputRef}
                 id={id}
-                className={`w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm pr-10
+                className={`w-full border-gray-300 outline-none border py-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm pl-3
                             ${
                               disabled
                                 ? " opacity-70 cursor-not-allowed bg-gray-100 "
@@ -160,7 +160,7 @@ export default function SelectInput({
                 ))
               )}
             </ComboboxOptions>
-          </>
+          </div>
         )}
       </Combobox>
     </div>

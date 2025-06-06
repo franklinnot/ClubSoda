@@ -9,12 +9,12 @@ export default function NavigationDesktop() {
     setRoutes(getRoutes() as IRoute[]);
   }, []);
   return (
-    <nav className="hidden md:flex flex-row gap-10 mt-[2px]">
+    <nav className="hidden md:flex flex-row gap-12 mt-[2px]">
       {routes.map((item: IRoute, index: number) => (
         <Link
           key={index}
 					to={item.route}
-          className="text-gray-700 font-normal text-sm hover:underline hover:underline-offset-1 hover:text-blue-600"
+          className="text-slate-700 font-medium text-sm hover:underline hover:underline-offset-1 hover:text-blue-600"
         >
           {item.title}
         </Link>
