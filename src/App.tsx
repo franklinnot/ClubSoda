@@ -7,6 +7,7 @@ import PurchaseNew from "./pages/purchases/purchase-new";
 import PurchaseHistory from "./pages/purchases/purchase-history/purchase-history";
 import RequestNew from "./pages/requests/request-new";
 import RequestHistory from "./pages/requests/request-history/request-history";
+import Pago from "./pages/Pago";
 import "./App.css";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/purchase/history" element={<PurchaseHistory />} />
         <Route path="/request/new" element={<RequestNew />} />
         <Route path="/request/history" element={<RequestHistory />} />
+        <Route path="/pago" element={<Pago />}/>
       </Routes>
     </BrowserRouter>
   );
