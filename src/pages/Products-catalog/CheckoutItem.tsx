@@ -7,18 +7,20 @@ interface CheckoutItemProps {
   titulo: string;
   cantidad: number;
   precio: number;
+  onCantidadChange: (cantidad: number) => void;
+  onEliminar: () => void; 
+
+
 }
 
 
 // 2. Usamos el tipo en el componente
-const CheckoutItem: React.FC<CheckoutItemProps> = ({ imagen, titulo, cantidad:cantidadInicial, precio }) => {
+const CheckoutItem: React.FC<CheckoutItemProps> = ({ imagen, titulo, cantidad, precio,onCantidadChange ,onEliminar }) => {
   
 
-  const [cantidad, setCantidad] = useState<number>(cantidadInicial);
-
-  const aumentar = () => setCantidad(cantidad + 1);
+  const aumentar = () => onCantidadChange(cantidad + 1);
   const disminuir = () => {
-    if (cantidad > 1) setCantidad(cantidad - 1);
+    if (cantidad > 1) onCantidadChange(cantidad - 1);
   };
   
   
@@ -61,7 +63,15 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({ imagen, titulo, cantidad:ca
       <div className="text-center font-bold w-20 min-w-[5rem]">
         <p className="font-bold">S/. {(precio * cantidad).toFixed(2)}</p>
       </div>
+      <button
+  onClick={onEliminar}
+  className="text-red-600 hover:text-red-800 text-xl"
+  title="Eliminar producto"
+>
+  🗑️
+</button>
     </div>
+    
   );
 };
 

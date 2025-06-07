@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PrimaryButton from "../../components/PrimaryButton"; // Si no lo usas, puedes eliminar esta línea
+import PrimaryButton from "../../components/PrimaryButton";
 
 const CheckoutForm: React.FC = () => {
   const [modoEntrega, setModoEntrega] = useState<"delivery" | "recojo">("delivery");
@@ -28,61 +28,51 @@ const CheckoutForm: React.FC = () => {
         </button>
       </div>
 
-      <div className="flex gap-4">
-        <div className="flex flex-col w-1/2">
-          <label className="mb-1 font-medium">Nombre</label>
+      {/* FORMULARIO SEGÚN EL MODO */}
+      {modoEntrega === "delivery" ? (
+        <div className="space-y-4">
+          <input
+            type="number"
+            placeholder="Celular"
+            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+          />
           <input
             type="text"
-            placeholder="Nombre"
-            className="bg-white w-full p-2 border border-gray-400 shadow rounded"
+            placeholder="Dirección"
+            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
           />
-        </div>
-
-        <div className="flex flex-col w-1/2">
-          <label className="mb-1 font-medium">Apellidos</label>
           <input
             type="text"
-            placeholder="Apellidos"
-            className="bg-white w-full p-2 border border-gray-400 shadow rounded"
+            placeholder="Referencia"
+            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
           />
-        </div>
-      </div>
-
-      <label className="font-medium">Correo</label>
-      <input
-        type="email"
-        placeholder="@gmail.com"
-        className="bg-white w-full p-2 border border-gray-400 shadow rounded"
-      />
-
-      {modoEntrega === "delivery" && (
-        <div className="flex gap-4">
-          <div className="flex flex-col w-1/2">
-            <label className="mb-1 font-medium">Dirección</label>
-            <input
-              type="text"
-              placeholder="Dirección"
-              className="bg-white w-full p-2 border border-gray-400 shadow rounded"
-            />
-          </div>
-
-          <div className="flex flex-col w-1/2">
-            <label className="mb-1 font-medium">Distrito</label>
-            <select className="bg-white p-2 border border-gray-400 shadow rounded">
-              <option value=""></option>
+          <div>
+            <label className="mb-1 font-medium block">Distrito</label>
+            <select className="w-full bg-white p-2 border border-gray-400 shadow rounded">
+              <option value="">Selecciona un distrito</option>
               <option value="Distrito1">Distrito 1</option>
               <option value="Distrito2">Distrito 2</option>
             </select>
           </div>
         </div>
+      ) : (
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Nombres"
+            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+          />
+          <input
+            type="text"
+            placeholder="Apellidos"
+            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+          />
+          <input
+            type="date"
+            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+          />
+        </div>
       )}
-
-      <label className="mb-1 font-medium">Referencia</label>
-      <input
-        type="text"
-        placeholder="Referencia"
-        className="bg-white w-full p-2 border border-gray-400 shadow rounded"
-      />
     </div>
   );
 };
