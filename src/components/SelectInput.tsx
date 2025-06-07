@@ -102,7 +102,7 @@ export default function SelectInput({
                                 : ""
                             }
                             ${error ? " border-red-500" : ""}
-                            ${value ? " bg-blue-50 " : " "}`}
+                            ${value && value.name ? " bg-blue-50 " : " "}`}
                 displayValue={displayValue as (item: unknown) => string} // Added type assertion for displayValue compatibility with Headless UI
                 onChange={(
                   event: React.ChangeEvent<HTMLInputElement> // Typed event

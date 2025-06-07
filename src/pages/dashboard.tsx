@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import LayoutAuth from "../layouts/layout-auth";
 
-
 export default function Dashboard() {
   return (
-  
     <LayoutAuth title="Dashboard">
       <h1>Dashboard</h1>
       <Link className="block text-blue-600" to="/login">
@@ -14,10 +12,5 @@ export default function Dashboard() {
         Registrarme ahora
       </Link>
     </LayoutAuth>
-
-
-
-
-  
   );
 }
