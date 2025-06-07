@@ -15,19 +15,19 @@ const Pago: React.FC = () => {
   // 2. Array de productos tipado correctamente
   const productos: Producto[] = [
     {
-      imagen: "/src/assets/torta_chocolate.png.png",
+      imagen: "/src/assets/chikiwafer.png",
       titulo: "Caja de Chiki Wafer Fiesta",
       cantidad: 5,
       precio: 6.0,
     },
     {
-      imagen: "/src/assets/torta_chocolate.png.png",
+      imagen: "/src/assets/chikiwafer.png",
       titulo: "Caja de Chiki Wafer Fiesta",
       cantidad: 1,
       precio: 4.0,
     },
     {
-      imagen: "/src/assets/torta_chocolate.png.png",
+      imagen: "/src/assets/chikiwafer.png",
       titulo: "Caja de Chiki Wafer Fiesta",
       cantidad: 1,
       precio: 4.0,
@@ -44,17 +44,19 @@ const Pago: React.FC = () => {
     <div className="p-6 flex flex-col gap-6">
       <div className="flex flex-col lg:flex-row gap-6">
 
-        <div className="lg:w-2/3 bg-white p-6 rounded-lg shadow overflow-y-auto max-h-[500px]">
+        <div className="lg:w-2/3 bg-white p-6 rounded-lg shadow overflow-x-auto max-h-[500px]">
           <div>
             <h2 className="text-2xl font-bold">Carrito de compras</h2>
-            <div className="mt-5 border-t-2 border-black pt-4" />
+            <div className="mt-5  border-t-2 border-black pt-4" />
+          </div>
+
+          <div className="min-w-[600px]">
+              {productos.map((item, index) => (
+              <CheckoutItem key={index} {...item} />    
+          ))}
           </div>
 
           
-
-          {productos.map((item, index) => (
-            <CheckoutItem key={index} {...item} />
-          ))}
         </div>
 
         {/* Formulario, resumen y métodos de pago */}

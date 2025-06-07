@@ -24,7 +24,7 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({ imagen, titulo, cantidad:ca
   
   return (
     
-    <div className="items-center col-span-2 bg-white p-4 border border-gray-400 rounded-lg shadow-md flex items-center gap-10 mb-4 " >
+    <div className="flex flex-wrap md:flex:nowrap items-center col-span-2 bg-white p-4 border border-gray-400 rounded-lg shadow-md flex items-center gap-4 mb-4 " >
       <img
         src={imagen}
         alt={titulo}
@@ -34,10 +34,10 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({ imagen, titulo, cantidad:ca
 
       <div className="flex-1">
         <h4 className="font-semibold text-lg">{titulo}</h4>
-        <p className="">Producto</p>
+        <p className="text-sm text-gray-500">Producto</p>
       </div>
 
-       <div className="flex items-center gap-2 w-40 justify-center">
+       <div className="flex items-center gap-2 ">
         <button
           onClick={aumentar}
           className="px-2 bg-red-600 text-[12px] font-semibold  text-white rounded-sm font-bold"
@@ -54,11 +54,11 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({ imagen, titulo, cantidad:ca
         </button>
       </div>
 
-      <div className="w-24 text-center font-bold">
+      <div className=" text-center font-bold w-20 min-w-[5rem]">
         <p className="text-sm">S/. {precio.toFixed(2)}</p>
       </div>
 
-      <div className="w-24 text-center font-bold">
+      <div className="text-center font-bold w-20 min-w-[5rem]">
         <p className="font-bold">S/. {(precio * cantidad).toFixed(2)}</p>
       </div>
     </div>
