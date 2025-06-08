@@ -3,11 +3,13 @@ import type { FC } from "react";
 import InputLabel from "../../components/InputLabel";
 import PrimaryButton from "../../components/PrimaryButton";
 import { motion } from "framer-motion";
+import { image } from "framer-motion/client";
 
 interface ProductCardProps {
   nombre: string;
   precio: number;
   cantidad: number;
+  imagen: string;
   Agregar: () => void;
   Incrementar: () => void;
   Disminuir: () => void;
@@ -17,6 +19,7 @@ const ProductCard: FC<ProductCardProps> = ({
   nombre,
   precio,
   cantidad,
+  imagen,
   Agregar,
   Incrementar,
   Disminuir,
@@ -29,7 +32,10 @@ const ProductCard: FC<ProductCardProps> = ({
       transition={{ duration: 0.7 }}
       className="border p-4 rounded-lg shadow-md flex flex-col items-center bg-white w-full max-w-sm mx-auto "
     >
-      <div className="w-full aspect-[4/3] bg-gray-100 mb-3 rounded-md" />
+      <img
+      src={imagen}
+      alt={nombre}
+      className="w-full aspect-[4/3] bg-gray-100 mb-3 rounded-md" />
       <p className="font-semibold text-center text-base sm:text-lg">{nombre}</p>
       <InputLabel className="text-sm sm:text-base">S/. {precio}</InputLabel>
 

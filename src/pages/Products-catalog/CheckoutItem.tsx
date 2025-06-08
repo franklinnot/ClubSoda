@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import PrimaryButton from "../../components/PrimaryButton";
 
 // 1. Tipamos las props
 interface CheckoutItemProps {
@@ -7,8 +5,8 @@ interface CheckoutItemProps {
   titulo: string;
   cantidad: number;
   precio: number;
-  onCantidadChange: (cantidad: number) => void;
-  onEliminar: () => void; 
+  onCantidadChange: (nuevaCantidad: number) => void;
+  onEliminar: () => void;
 
 
 }

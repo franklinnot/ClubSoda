@@ -1,7 +1,13 @@
 import React from "react";
-import PrimaryButton from "../../components/PrimaryButton";
 
-const PaymentMethods: React.FC = () => {
+interface PaymentMethodsProps {
+  onPagar: () => void;
+  metodoPago: string;
+  setMetodoPago: (metodo: string) => void;
+
+}
+
+const PaymentMethods: React.FC<PaymentMethodsProps> = ({onPagar, metodoPago, setMetodoPago}) => {
   return (
     <div className="text-center mt-6">
       <h4 className="text-lg font-bold mb-4 text-center">MÉTODOS DE PAGO</h4>
@@ -11,17 +17,23 @@ const PaymentMethods: React.FC = () => {
           <div className="flex sm:flex-row gap-1 text-4xl mb-1">
             <img
               src="/src/assets/yape.png"
-              className="translate-y-4 w-full h-17 duration-300 ease-in-out hover:scale-110"
+              onClick={()=> setMetodoPago("Yape")}
+              className={`cursor-pointer w-full h-17 duration-300 ease-in-out hover:scale-110 ${
+                metodoPago === "Yape" ? "ring-4 ring-purple-500 rounded" : ""
+              }`}
               alt="Yape"
             />
             <img
               src="/src/assets/BCP.png"
-              className="w-full h-17 mt-4 transition duration-300 ease-in-out hover:scale-110"
+              onClick={() => setMetodoPago("Tarjeta")}
+              className={`cursor-pointer ml-7 w-full h-17  duration-300 ease-in-out hover:scale-110 ${
+                metodoPago === "Tarjeta" ? "ring-4 ring-blue-500 rounded" : ""
+              }`}
               alt="BCP"
             />
           </div>
 
-          <button  className="inline-flex justify-center items-center w-full py-2 bg-red-600  border border-transparent rounded-md font-medium text-base text-white hover:bg-red-400 transition duration-300 ease-in-out hover:scale-104">
+          <button onClick={onPagar} className="inline-flex justify-center items-center w-full py-2 bg-red-600  border border-transparent rounded-md font-medium text-base text-white hover:bg-red-400 transition duration-300 ease-in-out hover:scale-104">
             Pagar
           </button>
 
