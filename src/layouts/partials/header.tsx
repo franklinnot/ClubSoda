@@ -21,7 +21,7 @@ export default function Header({ user, title, className = "" }: IHeaderProps) {
     >
       <div className="grid grid-flow-col place-items-center justify-self-start gap-3">
         {/* Navegacion -- celulares */}
-        <NavigationMobile className="inline-flex md:hidden" />
+        <NavigationMobile className="inline-flex lg:hidden" />
 
         {/* Application logo */}
         <Link className="hidden sm:inline-flex ml-1 mt-0.5" to="dashboard">
@@ -31,7 +31,7 @@ export default function Header({ user, title, className = "" }: IHeaderProps) {
 
       {/* Page title */}
       {title && (
-        <h1 className="inline-flex absolute md:hidden text-base font-medium text-gray-700 mt-1">
+        <h1 className="inline-flex absolute lg:hidden text-base font-medium text-gray-700 mt-1">
           <span className="text-nowrap">{title}</span>
         </h1>
       )}

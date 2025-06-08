@@ -31,7 +31,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <LayoutAuth title="Nueva consulta">
+    <LayoutAuth title="Nueva consulta" className="pb-10 sm:pb-12 md:pb-14 lg:pb-16">
       <div
         className="flex flex-col px-7 gap-5 sm:gap-6 md:gap-7 lg:gap-8 divide-y divide-gray-300"
         onSubmit={submit}

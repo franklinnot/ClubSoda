@@ -5,6 +5,7 @@ import Header from "./partials/header";
 export default function LayoutAuth({
   children,
   className = "",
+  classNameMain = "",
   title,
   user,
 }: ILayoutProps) {
@@ -14,7 +15,9 @@ export default function LayoutAuth({
   return (
     <div className={`flex min-h-dvh flex-col overflow-x-hidden ${className}`}>
       <Header title={title} user={user} className="" />
-      <main className="flex flex-col flex-1 justify-center items-center">
+      <main
+        className={`flex flex-col flex-1 justify-center items-center ${classNameMain}`}
+      >
         {children}
       </main>
     </div>
