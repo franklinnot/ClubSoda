@@ -32,7 +32,7 @@ export function guardarVenta(
         datosEntrega,
     };
 
-    const ventasPrevias = JSON.parse(localStorage.getItem("Ventas")||"[]");
+    const ventasPrevias = JSON.parse(localStorage.getItem("ventas")||"[]");
     ventasPrevias.push(venta);
     localStorage.setItem("ventas", JSON.stringify(ventasPrevias));
     localStorage.removeItem("carrito");

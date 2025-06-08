@@ -1,13 +1,11 @@
 import type { IProduct } from "../classes/interfaces/iproduct";
 import type { ISaleDetail } from "../classes/interfaces/isaleDetail";
 
-
 export function obtenerCarrito(): ISaleDetail[]{
     const data = localStorage.getItem("carrito");
     return data? JSON.parse(data):[]
 
 }
-
 
 export function guardarCarrito(detalles: ISaleDetail[]){
 
