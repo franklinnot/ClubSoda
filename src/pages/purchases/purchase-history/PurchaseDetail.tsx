@@ -1,27 +1,20 @@
 import ProductPurchased from "./ProductPurchased";
 import StarRating from "../../../components/StarRating";
-import {IconCloseCircle } from "../../../components/Icons";
+import { IconCloseCircle } from "../../../components/Icons";
 import type { JSX } from "react";
+import type { IDelivery } from "../../../classes/interfaces/idelivery";
+import type { IProduct } from "../../../classes/interfaces/iproduct";
 
-interface Producto {
-    nombre: string;
-    cantidad: number;
-    precio: number;
-    imagen: string;
-}
-
-interface Cliente {
-    telefono: string;
-    correo: string;
-    direccion: string;
-    remitente: string;
+interface ProductoComprado {
+  product: IProduct;
+  quantity: number;
 }
 
 interface PurchaseDetailProps {
-    id: string;
-    productos: Producto[];
-    cliente: Cliente;
-    onClose?: () => void;
+  id: string;
+  productos: ProductoComprado[];
+  cliente: IDelivery;
+  onClose?: () => void;
 }
 
 export default function PurchaseDetail({
@@ -30,7 +23,6 @@ export default function PurchaseDetail({
   cliente,
   onClose,
 }: PurchaseDetailProps): JSX.Element {
- 
   return (
     <section
       className={`
@@ -65,18 +57,35 @@ export default function PurchaseDetail({
 
       {/* Productos */}
       <div className="flex-1 overflow-y-auto pr-1 space-y-3 mb-4">
-        {productos.map((producto, index) => (
-          <ProductPurchased key={index} {...producto} />
+        {productos.map(({ product, quantity }, index) => (
+          <ProductPurchased
+            key={index}
+            nombre={product.name}
+            cantidad={quantity}
+            precio={product.price}
+            imagen={product.url}
+          />
         ))}
       </div>
 
       {/* Cliente */}
       <h3 className="font-semibold mb-2">Detalles de la compra</h3>
-      <div className="p-4 rounded-lg text-sm" style={{ border: "1px solid #8E8E8E" }}>
-        <p><strong>Teléfono:</strong> {cliente.telefono}</p>
-        <p><strong>Correo:</strong> {cliente.correo}</p>
-        <p><strong>Dirección:</strong> {cliente.direccion}</p>
-        <p><strong>Remitente:</strong> {cliente.remitente}</p>
+      <div
+        className="p-4 rounded-lg text-sm"
+        style={{ border: "1px solid #8E8E8E" }}
+      >
+        <p>
+          <strong>Teléfono:</strong> {cliente.phone}
+        </p>
+        <p>
+          <strong>Correo:</strong> {cliente.email}
+        </p>
+        <p>
+          <strong>Dirección:</strong> {cliente.address}
+        </p>
+        <p>
+          <strong>Distrito:</strong> {cliente.district}
+        </p>
       </div>
     </section>
   );

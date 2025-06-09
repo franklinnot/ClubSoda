@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HistorySidebar from "../../../components/HistorySidebar";
 import LayoutAuth from "../../../layouts/layout-auth";
 import PurchaseDetail from "./PurchaseDetail";
-import { purchases } from './records';
+import { obtenerVentas, type IVenta } from "../../../utils/ventas";
 
 export default function PurchaseHistory() {
- const [selectedId, setSelectedId] = useState<string | null>(null);
-  const compraActiva = purchases.find(p => p.id === selectedId);
+  const [ventas, setVentas] = useState<IVenta[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const compraActiva = ventas.find(p => p.id === selectedId);
+
+  useEffect(() => {
+  const data = obtenerVentas();
+  // Ordenar por fecha descendente
+  const ordenadas = [...data].sort((a, b) => {
+    return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
+  });
+  setVentas(ordenadas);
+
+  // Mostrar automáticamente la más reciente
+  if (ordenadas.length > 0) {
+    setSelectedId(ordenadas[0].id);
+  }
+}, []);
+
 
   return (
     <LayoutAuth title="Historial de compras">
@@ -14,9 +30,12 @@ export default function PurchaseHistory() {
         {/* Sidebar de historial */}
         <HistorySidebar
           title="Historial de compras"
-          purchases={purchases.map((p) => ({
-            ...p,
-            productos: p.productos.length, 
+          purchases={ventas.map((p) => ({
+            id: p.id,
+            total: `PEN S/. ${p.total.toFixed(2)}`,
+            estado: p.estado,
+            fecha: p.fecha,
+            productos: p.productos.length,
             onClick: () => setSelectedId(p.id),
             isActive: p.id === selectedId,
           }))}
@@ -26,9 +45,17 @@ export default function PurchaseHistory() {
         {compraActiva && (
           <PurchaseDetail
             id={compraActiva.id}
-            productos={compraActiva.productos}
-            cliente={compraActiva.cliente}
-            onClose={() => setSelectedId(null)} 
+            productos={compraActiva.productos.map((prod) => ({
+              product: prod.product,
+              quantity: prod.quantity,
+            }))}
+            cliente={{
+              phone: compraActiva.datosEntrega?.phone ?? "",
+              email: compraActiva.datosEntrega?.email ?? "",
+              address: compraActiva.datosEntrega?.address ?? "",
+              district: compraActiva.datosEntrega?.district ?? "Desconocido",
+            }}
+            onClose={() => setSelectedId(null)}
           />
         )}
       </div>
