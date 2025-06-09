@@ -4,4 +4,5 @@ export interface ILayoutProps {
   classNameMain?: string;
   title: string;
   user?: { name: string };
+  footer?: boolean;
 }
