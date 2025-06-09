@@ -45,12 +45,21 @@ export default function Header({ user, title, className = "" }: IHeaderProps) {
       />
 
       {/* profile button */}
+
       <div className="flex flex-row justify-self-end items-center gap-4 mt-1">
+        <Link to="/pago">
         <Button className="p-1.5 rounded-full bg-transparent hover:bg-indigo-50 focus:bg-indigo-50">
           <IconShoppingBag size={24} className="text-slate-700" />
         </Button>
+        </Link>
+        
         <ProfileMenu user={user} />
       </div>
+      
+      
+      
+     
+      
     </header>
   );
 }

@@ -47,4 +47,10 @@ export class Sale implements ISale {
     // Calculamos el total
     this.total = this.details.reduce((sum, d) => sum + d.subtotal, 0);
   }
+
+  guardar(){
+    const ventas = JSON.parse(localStorage.getItem("ventas")|| "[]");
+    ventas.push(this);
+    localStorage.setItem("ventas", JSON.stringify(ventas))
+  }
 }
