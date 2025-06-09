@@ -34,7 +34,7 @@ export default function LayoutAuth({
         {children}
       </main>
       {footer && (
-        <footer className="w-dvw mt-20 bg-[#ee1d23] text-white border-t border-t-white py-16 text-center">
+        <footer className="w-dvw mt-20 bg-white text-slate-700 border-t border-t-white py-6 text-center">
           <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-16">
             {/* Logo San Jorge */}
             <div className="flex flex-col items-center">
@@ -61,7 +61,7 @@ export default function LayoutAuth({
               <span className="bg-red-500">
                 <LogoMoli className="size-20" />
               </span>
-              <span className="font-semibold mt-3">
+              <span className="font-semibold mt-5">
                 Compañía Molinera del Centro S. A.
               </span>
               <span className="max-w-[200px]">
