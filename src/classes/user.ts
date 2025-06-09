@@ -1,6 +1,6 @@
 import type { IUser } from "./interfaces/isuer";
 
-class User implements IUser {
+export class User implements IUser {
   name: string;
   lastname: string;
   doctype: string;

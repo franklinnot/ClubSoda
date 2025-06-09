@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import PrimaryButton from "../../components/PrimaryButton";
 
 interface CheckoutFormProps {
@@ -16,6 +15,8 @@ interface CheckoutFormProps {
   setDistrict: (valor: string) => void;
   fechaSeleccionada: string;
   setFechaSeleccionada: (valor: string) => void;
+  stars: number;
+  setStars: (valor: number) => void;
 }
 
 
