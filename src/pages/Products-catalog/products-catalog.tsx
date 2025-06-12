@@ -60,7 +60,7 @@ export default function ProductsCatalog() {
         </div>
 
         {/* Contenedor de productos scrollable solo en escritorio */}
-        <div className="flex-1 pr-2">
+        <div className="flex-1 overflow-y-auto pr-2">
           <div className="grid gap-4 place-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] max-w-screen-lg mx-auto">
             {productosFiltrados.map((p, index) => (
               <ProductCard
