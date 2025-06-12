@@ -1,9 +1,8 @@
-// ProductCard.tsx
+import { useState } from "react";
 import type { FC } from "react";
-import InputLabel from "../../components/InputLabel";
 import PrimaryButton from "../../components/PrimaryButton";
 import { motion } from "framer-motion";
-import { image } from "framer-motion/client";
+import { IconHeart } from "../../components/Icons";
 
 interface ProductCardProps {
   nombre: string;
@@ -24,49 +23,78 @@ const ProductCard: FC<ProductCardProps> = ({
   Incrementar,
   Disminuir,
 }) => {
+  const [isFavorito, setIsFavorito] = useState(false);
+
+  const toggleFavorito = () => {
+    setIsFavorito((prev) => !prev);
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.7 }}
-      className="border p-4 rounded-lg shadow-md flex flex-col items-center bg-white w-full max-w-sm mx-auto "
+      transition={{ duration: 0.4 }}
+      className="w-[220px] rounded-2xl overflow-hidden border border-slate-300 bg-white flex flex-col"
     >
-      <img
-      src={imagen}
-      alt={nombre}
-      className="w-full aspect-[4/3] bg-gray-100 mb-3 rounded-md" />
-      <p className="font-semibold text-center text-base sm:text-lg">{nombre}</p>
-      <InputLabel className="text-sm sm:text-base">S/. {precio}</InputLabel>
+      {/* Imagen con ícono de corazón */}
+      <div className="relative w-full h-[140px]">
+        <img src={imagen} alt={nombre} className="w-full h-full object-contain" />
 
-      <div className="flex items-center justify-center gap-2 my-3">
-        <PrimaryButton
-          onClick={Disminuir}
-          className="bg-gray-300 rounded px-3 py-1 text-sm"
+        {/* Ícono de corazón */}
+        <div
+          onClick={toggleFavorito}
+          className="absolute top-2 left-2 cursor-pointer"
         >
-          -
-        </PrimaryButton>
-        <InputLabel className="border px-3 py-1 rounded text-sm">
-          {String(cantidad).padStart(2, "0")}
-        </InputLabel>
-        <PrimaryButton
-          onClick={Incrementar}
-          className="bg-red-500 text-white rounded px-3 py-1 text-sm"
-        >
-          +
-        </PrimaryButton>
+          <IconHeart
+            className={`w-5 h-5 transition-colors duration-200 ${isFavorito ? "text-red-500" : "text-gray-400"
+              }`}
+            fill={isFavorito ? "currentColor" : "none"} // importante para relleno
+          />
+        </div>
       </div>
 
-      <PrimaryButton
-        onClick={Agregar}
-        className="bg-red-500 text-white w-full rounded px-3 py-2 text-sm"
-      >
-        Agregar
-      </PrimaryButton>
+      {/* Nombre y precio */}
+      <div className="flex justify-between items-start px-3 pt-2">
+        <p className="text-sm font-medium text-gray-800 w-[60%] line-clamp-2">
+          {nombre}
+        </p>
+        <p className="text-sm font-semibold text-red-600 whitespace-nowrap">
+          S/. {precio.toFixed(2)}
+        </p>
+      </div>
 
-      <InputLabel className="mt-2 text-xs text-center text-gray-600">
-        {String(cantidad).padStart(2, "0")} agregado al carrito
-      </InputLabel>
+      {/* Controles */}
+      <div className="flex items-center justify-between px-3 py-3">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={Disminuir}
+            className="w-6 h-6 bg-gray-200 rounded-full text-xs font-bold text-gray-700 hover:bg-gray-300"
+          >
+            –
+          </button>
+          <span className="text-sm font-medium w-6 text-center">
+            {String(cantidad).padStart(2, "0")}
+          </span>
+          <button
+            onClick={Incrementar}
+            className="w-6 h-6 bg-red-500 text-white rounded-full text-xs font-bold hover:bg-red-600"
+          >
+            +
+          </button>
+        </div>
+
+        <PrimaryButton
+          onClick={Agregar}
+          disabled={cantidad === 0}
+          className={`text-xs font-semibold px-4 py-1 rounded-md ${cantidad === 0
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-red-500 hover:bg-red-600 text-white"
+            }`}
+        >
+          Agregar
+        </PrimaryButton>
+      </div>
     </motion.div>
   );
 };

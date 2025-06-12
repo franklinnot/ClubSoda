@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react";
 import Checkbox from "../../components/Checkbox";
-import PrimaryButton from "../../components/PrimaryButton";
 import { motion, AnimatePresence } from "framer-motion";
-
-const categoria = [
-  "Galletas Dulces",
-  "Galletas Saladas",
-  "Panetones",
-  "Wafers",
-  "Pastas",
-  "Harinas",
-  "Mermeladas",
-  "Aguas",
-];
+import { categoria } from "./data/categorias";
+import { IconFunnel } from "../../components/Icons";
+import { rangosPrecios } from "./data/precio";
 
 export default function SidebarFiltros({
   onCategoriaChange,
@@ -22,108 +13,100 @@ export default function SidebarFiltros({
   onPrecioChange: (min: number, max: number) => void;
 }) {
   const [Seleccionadas, setSeleccionadas] = useState<string[]>([]);
-  const [minPrecio, setMinPrecio] = useState(30);
-  const [maxPrecio, setMaxPrecio] = useState(300);
+  const [rangoSeleccionado, setRangoSeleccionado] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(true);
 
-  // Opcional: detectar tamaño y cerrar menú automáticamente si la pantalla es pequeña (puedes ajustar el valor)
   useEffect(() => {
     function handleResize() {
-      if (window.innerWidth < 800) {
-        setIsOpen(false);
-      } else {
-        setIsOpen(true);
-      }
+      setIsOpen(window.innerWidth >= 800);
     }
     window.addEventListener("resize", handleResize);
-    handleResize(); // Ejecutar al montar
-
+    handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const toggleCategoria = (categoria: string) => {
-    let nuevasCategorias = [...Seleccionadas];
-    if (nuevasCategorias.includes(categoria)) {
-      nuevasCategorias = nuevasCategorias.filter((c) => c !== categoria);
-    } else {
-      nuevasCategorias.push(categoria);
-    }
-    setSeleccionadas(nuevasCategorias);
-    onCategoriaChange(nuevasCategorias);
+  const toggleCategoria = (cat: string) => {
+    const nuevas = Seleccionadas.includes(cat)
+      ? Seleccionadas.filter((c) => c !== cat)
+      : [...Seleccionadas, cat];
+    setSeleccionadas(nuevas);
+    onCategoriaChange(nuevas);
   };
 
-  const confirmarPrecio = () => {
-    onPrecioChange(minPrecio, maxPrecio);
+  const seleccionarRango = (i: number) => {
+    setRangoSeleccionado(i);
+    const { min, max } = rangosPrecios[i];
+    onPrecioChange(min, max);
   };
 
   return (
-    <div className="w-full sm:max-w-md lg:max-w-xs xl:max-w-sm mx-auto lg:mx-0 p-4">
-      {/* Botón para mostrar/ocultar menú en pantalla pequeña o zoom */}
+    <aside className="w-full md:w-[280px] md:h-full md:border-r border-gray-300 px-4 py-2 bg-white rounded-none z-50">
+      {/* Botón siempre visible */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-red-500 text-white font-semibold px-4 py-2 rounded mb-2 lg:hidden w-full"
+        className="flex items-center justify-center gap-2 bg-red-500 text-white font-semibold px-4 py-2 rounded mb-4 w-full transition hover:bg-red-600"
       >
+        <IconFunnel className="w-5 h-5 text-white" />
         {isOpen ? "Ocultar filtros" : "Mostrar filtros"}
       </button>
 
+      {/* Contenedor del filtro animado */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-h-[550px] overflow-auto border border-gray-300 p-4 rounded-lg bg-white shadow-sm"
+            transition={{ duration: 0.4 }}
+            className="w-full pr-4 bg-white"
           >
-            <h2 className="text-lg font-semibold text-white bg-red-500 rounded px-2 py-1 mb-4">
-              Categorías
-            </h2>
-            <div className="space-y-4">
-              {categoria.map((cat) => (
-                <label key={cat} className="flex items-center gap-2 text-sm">
-                  <Checkbox
-                    className="accent-red-500"
-                    value={cat}
-                    checked={Seleccionadas.includes(cat)}
-                    onChange={() => toggleCategoria(cat)}
-                  />
-                  {cat}
-                </label>
-              ))}
+            {/* Categorías */}
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold text-gray-600 mb-2 pb-1 border-b border-gray-300">
+                Categorías
+              </h3>
+              <div className="space-y-3 mt-3">
+                {categoria.map((cat) => (
+                  <label
+                    key={cat}
+                    className="flex items-center gap-2 text-sm text-gray-700"
+                  >
+                    <Checkbox
+                      className="accent-red-500"
+                      value={cat}
+                      checked={Seleccionadas.includes(cat)}
+                      onChange={() => toggleCategoria(cat)}
+                    />
+                    {cat}
+                  </label>
+                ))}
+              </div>
             </div>
 
-            <h2 className="text-lg font-semibold text-red-600 mt-6 mb-2">
-              Precio
-            </h2>
-            <div className="flex items-center justify-between text-sm gap-2">
-              <input
-                type="number"
-                min={30}
-                max={300}
-                value={minPrecio}
-                onChange={(e) => setMinPrecio(Number(e.target.value))}
-                className="w-20 border rounded p-1 text-center"
-              />
-              <span className="text-gray-600">-</span>
-              <input
-                type="number"
-                min={30}
-                max={300}
-                value={maxPrecio}
-                onChange={(e) => setMaxPrecio(Number(e.target.value))}
-                className="w-20 border rounded p-1 text-center"
-              />
+            {/* Rangos de precios */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-600 mb-2 pb-1 border-b border-gray-300">
+                Precio
+              </h3>
+              <div className="space-y-3 mt-3">
+                {rangosPrecios.map((rango, i) => (
+                  <label
+                    key={i}
+                    className="flex items-center gap-2 text-sm text-gray-700"
+                  >
+                    <Checkbox
+                      className="accent-red-500"
+                      checked={rangoSeleccionado === i}
+                      onChange={() => seleccionarRango(i)}
+                    />
+                    {rango.label}
+                  </label>
+                ))}
+              </div>
             </div>
-
-            <PrimaryButton
-              onClick={confirmarPrecio}
-              className="w-full bg-red-500 hover:bg-red-600 text-white font-medium mt-4 py-2 rounded-md"
-            >
-              Aplicar filtros
-            </PrimaryButton>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </aside>
   );
 }
