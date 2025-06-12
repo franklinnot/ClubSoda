@@ -1,7 +1,9 @@
 export const categoria = [
   "Galletas",
-  "Panetones",
   "Wafers",
   "Pastas",
   "Mermeladas",
+  "Venta por Unidad",
+  "Venta por Caja",
+  "Venta por Bolsón"
 ];

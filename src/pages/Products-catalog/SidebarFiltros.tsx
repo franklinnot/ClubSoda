@@ -8,9 +8,11 @@ import { rangosPrecios } from "./data/precio";
 export default function SidebarFiltros({
   onCategoriaChange,
   onPrecioChange,
+
 }: {
   onCategoriaChange: (categorias: string[]) => void;
   onPrecioChange: (min: number, max: number) => void;
+
 }) {
   const [Seleccionadas, setSeleccionadas] = useState<string[]>([]);
   const [rangoSeleccionado, setRangoSeleccionado] = useState<number | null>(null);
@@ -34,13 +36,19 @@ export default function SidebarFiltros({
   };
 
   const seleccionarRango = (i: number) => {
+  if (rangoSeleccionado === i) {
+    setRangoSeleccionado(null);
+    onPrecioChange(0, Infinity); // Reinicia filtro de precio
+  } else {
     setRangoSeleccionado(i);
     const { min, max } = rangosPrecios[i];
     onPrecioChange(min, max);
-  };
+  }
+};
+
 
   return (
-    <aside className="w-full md:w-[280px] md:h-full md:border-r border-gray-300 px-4 py-2 bg-white rounded-none z-50">
+    <aside className={`w-full md:w-[280px] md:h-full md:border-r border-gray-300 px-4 py-2 bg-white rounded-none z-50`}>
       {/* Botón siempre visible */}
       <button
         onClick={() => setIsOpen(!isOpen)}

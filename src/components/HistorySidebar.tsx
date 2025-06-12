@@ -12,15 +12,10 @@ export default function HistorySidebar({ title, purchases, requests }: HistorySi
 
     return (
         <aside
-            className="w-full md:w-[400px] h-full overflow-y-auto border rounded-xl p-4"
-            style={{
-                backgroundColor: "#F9FBFC",
-                borderColor: "#BABABA",
-            }}
+            className="w-full md:w-[400px] h-full overflow-y-auto border border-gray-300 bg-white rounded-xl p-4"
         >
             <h2
-                className="hidden md:block text-md font-medium text-center mb-4"
-                style={{ color: "#4A4848" }}
+                className="hidden md:block text-md font-semibold text-center text-gray-700 mb-4"
             >
                 {title}
             </h2>

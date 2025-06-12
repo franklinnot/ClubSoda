@@ -20,9 +20,9 @@ const estadoColors: Record<string, string> = {
 };
 
 const estadoIcons: Record<string, JSX.Element> = {
-  "En progreso": <IconClock className="text-yellow-500" />,
-  "Finalizado": <IconCheckCircle className="text-green-500" />,
-  "Cancelado": <IconCloseCircle className="text-red-500" />,
+  "En progreso": <IconClock size={20} className="text-yellow-500" />,
+  "Finalizado": <IconCheckCircle size={20} className="text-green-500" />,
+  "Cancelado": <IconCloseCircle size={20} className="text-red-500" />,
 };
 
 export default function PurchaseItem({

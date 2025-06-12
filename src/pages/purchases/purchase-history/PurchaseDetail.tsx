@@ -26,7 +26,7 @@ export default function PurchaseDetail({
   return (
     <section
       className={`
-        flex-1 h-full flex flex-col text-[#4a4848] overflow-y-auto
+        flex-1 h-full flex flex-col text-gray-700 overflow-y-auto
         fixed inset-0 bg-white z-50 md:z-10 p-4 shadow-xl
         md:static md:p-0 md:shadow-none md:px-2
       `}
@@ -69,10 +69,10 @@ export default function PurchaseDetail({
       </div>
 
       {/* Cliente */}
-      <h3 className="font-semibold mb-2">Detalles de la compra</h3>
+      <h3 className="font-semibold mb-2 text-gray-600">Detalles de la compra</h3>
       <div
-        className="p-4 rounded-lg text-sm"
-        style={{ border: "1px solid #8E8E8E" }}
+        className="p-4 rounded-lg text-sm border border-gray-300 bg-white space-y-1 "
+        //style={{ border: "1px solid #8E8E8E" }}
       >
         <p>
           <strong>Teléfono:</strong> {cliente.phone}

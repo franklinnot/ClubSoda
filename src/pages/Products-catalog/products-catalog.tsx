@@ -32,14 +32,22 @@ export default function ProductsCatalog() {
 
   const productosFiltrados = productos.filter((producto) => {
     const dentroDePrecio = producto.precio >= precioMin && producto.precio <= precioMax;
+
+    const categoriasProducto = Array.isArray(producto.categoria)
+      ? producto.categoria
+      : [producto.categoria];
+
     const dentroDeCategoria =
-      filtroCategorias.length === 0 || filtroCategorias.includes(producto.categoria);
+      filtroCategorias.length === 0 ||
+      categoriasProducto.some((cat) => filtroCategorias.includes(cat));
+
     return dentroDePrecio && dentroDeCategoria;
   });
 
+
   return (
     <LayoutAuth title="Catálogo de Productos">
-      <div className="w-full max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-4 h-[calc(100vh-96px)]">
+      <div className="w-full max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-4">
         {/* Sidebar */}
         <div className="w-full md:w-[280px] md:shrink-0">
           <SidebarFiltros
@@ -52,7 +60,7 @@ export default function ProductsCatalog() {
         </div>
 
         {/* Contenedor de productos scrollable solo en escritorio */}
-        <div className="flex-1 overflow-y-auto pr-2">
+        <div className="flex-1 pr-2">
           <div className="grid gap-4 place-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] max-w-screen-lg mx-auto">
             {productosFiltrados.map((p, index) => (
               <ProductCard

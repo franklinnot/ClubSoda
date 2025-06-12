@@ -12,7 +12,7 @@ export default function ProductPurchased({
     imagen,
 }: ProductPurchasedProps) {
     return (
-        <div className="flex items-center gap-4 p-3 border rounded-lg " style={{ color: "#8E8E8E" }}>
+        <div className="flex items-center gap-4 p-3 border rounded-lg border-slate-300">
             <img src={imagen} alt={nombre} className="w-12 h-12 object-cover rounded" />
             <div className="flex-1">
                 <p className="font-medium">{nombre}</p>
