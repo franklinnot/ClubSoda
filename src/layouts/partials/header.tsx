@@ -17,7 +17,7 @@ interface IHeaderProps {
 export default function Header({ user, title, className = "" }: IHeaderProps) {
   return (
     <header
-      className={`bg-white sticky shrink-0 top-0 z-50 grid grid-flow-col place-items-center px-5 lg:px-6 h-14 sm:max-h-16 border-b border-gray-300 ${className}`}
+      className={`bg-white sticky shrink-0 top-0 z-30 grid grid-flow-col place-items-center px-5 lg:px-6 h-14 sm:max-h-16 border-b border-gray-300 ${className}`}
     >
       <div className="grid grid-flow-col place-items-center justify-self-start gap-3">
         {/* Navegacion -- celulares */}

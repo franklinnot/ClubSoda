@@ -1,4 +1,8 @@
 import PrimaryButton from "../../components/PrimaryButton";
+import InputField from "../../components/InputField";
+import { distritos } from "./data/distritos";
+import ComboBox from "../../components/ComboBox";
+import { sedes, tiendasPorSede } from "./data/sucursales";
 
 interface CheckoutFormProps {
   tipoEntrega: "delivery" | "recojo";
@@ -17,10 +21,15 @@ interface CheckoutFormProps {
   setFechaSeleccionada: (valor: string) => void;
   stars: number;
   setStars: (valor: number) => void;
+  sede: string;
+  setSede: (valor: string) => void;
+  tienda: string;
+  setTienda: (valor: string) => void;
+
 }
 
-
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
+
   tipoEntrega,
   setTipoEntrega,
   celular,
@@ -34,89 +43,113 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   district,
   setDistrict,
   fechaSeleccionada,
-  setFechaSeleccionada
-
-
+  setFechaSeleccionada,
+  sede,
+  setSede,
+  tienda,
+  setTienda,
 }) => {
-
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-bold mb-4 text-center">TIPO DE ENTREGA</h3>
 
-      <div className="flex justify-center gap-5 mt-4 pt-4 border-t-2 border-black">
-        <PrimaryButton
-          className={`transition duration-300 ease-in-out hover:scale-115 px-4 py-2 border rounded ${
-            tipoEntrega === "delivery" ? "bg-red border-gray-500 shadow" : "border-gray-300 shadow"
-          }`}
-          onClick={() => setTipoEntrega("delivery")}
-        >
-          Delivery
-        </PrimaryButton>
+    <div className="bg-white p-6 rounded-xl border border-gray-300 shadow space-y-6">
+      <h3 className="font-semibold text-gray-600 border-b border-gray-300 py-2 mb-4">
+        Tipo de entrega
+      </h3>
 
-        <button
-          className={`transition duration-300 ease-in-out hover:scale-115 px-4 py-2 border rounded ${
-            tipoEntrega === "recojo" ? "bg-white border-gray-500 shadow" : "border-gray-400 shadow"
-          }`}
-          onClick={() => setTipoEntrega("recojo")}
-        >
-          Recojo
-        </button>
+      <div className="flex justify-center">
+        <div className="inline-flex rounded-md border border-gray-300 overflow-hidden">
+          <PrimaryButton
+            onClick={() => setTipoEntrega("delivery")}
+            className={`rounded-none px-4 py-2 text-sm font-medium transition-all duration-200 ${tipoEntrega === "delivery"
+              ? "bg-gray-800 text-white"
+              : " text-gray-700 hover:bg-gray-100"
+              }`}
+          >
+            Delivery
+          </PrimaryButton>
+          <PrimaryButton
+            onClick={() => setTipoEntrega("recojo")}
+            className={`rounded-none px-4 py-2 text-sm font-medium transition-all duration-200 ${tipoEntrega === "recojo"
+              ? "bg-gray-800 text-white"
+              : " text-gray-700 hover:bg-gray-100"
+              }`}
+          >
+            Recojo
+          </PrimaryButton>
+        </div>
       </div>
 
-      {/* FORMULARIO SEGÚN EL MODO */}
       {tipoEntrega === "delivery" ? (
-        <div className="space-y-4">
-          <input
+        <div className="space-y-4 text-sm text-gray-700">
+          <InputField
+            id="celular"
+            label="Celular"
             type="number"
-            placeholder="Celular"
             value={celular}
-            onChange={(e)=> setCelular(e.target.value)}
-            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+            onChange={(e) => setCelular(e.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Correo electronico"
+          <InputField
+            id="email"
+            label="Correo electrónico"
+            type="email"
             value={email}
-            onChange={(e)=> setEmail(e.target.value)}
-            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <input
+          <InputField
+            id="direccion"
+            label="Dirección"
             type="text"
-            placeholder="Dirección"
             value={direccion}
-            onChange={(e)=> setDireccion(e.target.value)}
-            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+            onChange={(e) => setDireccion(e.target.value)}
           />
-          <input
+          <InputField
+            id="referencia"
+            label="Referencia"
             type="text"
-            placeholder="Referencia"
             value={referencia}
-            onChange={(e)=> setReferencia(e.target.value)}
-            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+            onChange={(e) => setReferencia(e.target.value)}
           />
-          <div>
-            <label className="mb-1 font-medium block">Distrito</label>
-            <select
-              value ={district}
-              onChange={(e)=> setDistrict(e.target.value)} 
-              className="w-full bg-white p-2 border border-gray-400 shadow rounded"
-            >
-              <option value="">Selecciona un distrito</option>
-              <option value="Distrito1">Distrito 1</option>
-              <option value="Distrito2">Distrito 2</option>
-            </select>
-          </div>
+          <ComboBox
+            id="district"
+            label="Distrito"
+            items={distritos}
+            value={distritos.find((d) => d.id === district) || null}
+            onChange={(item) => setDistrict(item?.id || "")}
+          />
         </div>
       ) : (
-        <div className="space-y-4">
-          
-          <input
+        <div className="space-y-4 text-sm text-gray-700">
+          <ComboBox
+            id="sede"
+            label="Sede"
+            items={sedes}
+            value={sedes.find((s) => s.id === sede) || null}
+            onChange={(item) => {
+              setSede(item?.id || "");
+              setTienda(""); // Reinicia la tienda si se cambia de sede
+            }}
+          />
+
+          <ComboBox
+            id="tienda"
+            label="Tienda"
+            items={tiendasPorSede[sede] || []}
+            value={tiendasPorSede[sede]?.find((t) => t.id === tienda) || null}
+            onChange={(item) => setTienda(item?.id || "")}
+          />
+
+          <InputField
+            id="fecha-recojo"
+            label="Fecha de recojo"
             type="date"
             value={fechaSeleccionada}
-            onChange={(e)=> setFechaSeleccionada(e.target.value)}
-            className="w-full bg-white p-2 border border-gray-400 shadow rounded"
+            onChange={(e) => setFechaSeleccionada(e.target.value)}
           />
+
+          <p className="text-gray-500 italic"> Horario de recojo: 8:00am-4:30pm</p>
+
         </div>
+
       )}
     </div>
   );

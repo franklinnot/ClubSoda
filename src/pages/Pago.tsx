@@ -3,18 +3,21 @@ import OrderSummary from "./Products-catalog/OrderSummary";
 import CheckoutForm from "./Products-catalog/CheckoutForm";
 import PaymentMethods from "./Products-catalog/PaymentMethods";
 import CheckoutItem from "./Products-catalog/CheckoutItem";
-import Header from "../layouts/partials/header";
 import type { ISaleDetail } from "../classes/interfaces/isaleDetail";
 import { obtenerCarrito, guardarCarrito } from "../utils/carrito";
 import { guardarVenta } from "../utils/ventas";
 import { Status } from "../classes/enums/status";
 import Toast from "../components/Toast";
 import { useNavigate } from "react-router-dom";
+import LayoutAuth from "../layouts/layout-auth";
+import { deliveryFees } from "./Products-catalog/data/distritos";
 
 const Pago: React.FC = () => {
   const navigate = useNavigate();
-
   const estado = Status.PROGRESO;
+  const [sede, setSede] = useState("");
+  const [tienda, setTienda] = useState("");
+
   const [productos, setProductos] = useState<ISaleDetail[]>([]);
   const [tipoEntrega, setTipoEntrega] = useState<"delivery" | "recojo">("delivery");
   const [metodoPago, setMetodoPago] = useState("Tarjeta");
@@ -39,10 +42,16 @@ const Pago: React.FC = () => {
     const calculoTotal = carrito.reduce((acc, item) => acc + item.subtotal, 0);
     setTotal(calculoTotal);
   }, []);
-
+  useEffect(() => {
+    const carrito = obtenerCarrito();
+    const calculoSubtotal = carrito.reduce((acc, item) => acc + item.subtotal, 0);
+    let deliveryExtra = 0;
+    if (tipoEntrega === "delivery" && district) {
+      deliveryExtra = deliveryFees[district] || 0;
+    }
+    setTotal(calculoSubtotal + deliveryExtra);
+  }, [productos, tipoEntrega, district]);
   const handlePagar = () => {
-    console.log("Pagar presionado"); // Confirmación en consola
-
     if (tipoEntrega === "delivery") {
       const datosEntrega = {
         district,
@@ -62,6 +71,7 @@ const Pago: React.FC = () => {
       message: "Compra realizada con éxito",
       type: "success",
     });
+
     setTimeout(() => {
       navigate("/products/catalog");
     }, 2000);
@@ -88,7 +98,7 @@ const Pago: React.FC = () => {
   };
 
   return (
-    <>
+    <LayoutAuth title="Carrito de Compras">
       {toast && (
         <Toast
           message={toast.message}
@@ -96,64 +106,66 @@ const Pago: React.FC = () => {
         />
       )}
 
-      <Header title="Pago" />
+      {/* Título general */}
+      <div className="w-full max-w-5xl mx-auto mt-6 mb-6 border-b border-gray-300 pb-2">
+        <h1 className="text-xl font-semibold text-gray-600">Carrito de compras</h1>
+      </div>
 
-      <div className="p-6 flex flex-col gap-6">
-        <div className="flex flex-col lg:flex-row gap-6">
-          <div className="lg:w-2/3 bg-white p-6 rounded-lg shadow overflow-x-auto max-h-[500px]">
-            <div>
-              <h2 className="text-2xl font-bold">Carrito de compras</h2>
-              <div className="mt-5 border-t-2 border-black pt-4" />
-            </div>
-
-            <div className="min-w-[600px]">
-              {productos.map((item, index) => (
-                <CheckoutItem
-                  key={index}
-                  imagen={item.product.url}
-                  titulo={item.product.name}
-                  cantidad={item.quantity}
-                  precio={item.product.price}
-                  onCantidadChange={(cantidad) => handleCantidadChange(index, cantidad)}
-                  onEliminar={() => handleEliminar(index)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:w-1/3 bg-white p-6 rounded-lg shadow">
-            <CheckoutForm
-              tipoEntrega={tipoEntrega}
-              setTipoEntrega={setTipoEntrega}
-              district={district}
-              setDistrict={setDistrict}
-              direccion={direccion}
-              setDireccion={setDireccion}
-              referencia={referencia}
-              setReferencia={setReferencia}
-              celular={celular}
-              setCelular={setCelular}
-              email={email}
-              setEmail={setEmail}
-              fechaSeleccionada={fechaSeleccionada}
-              setFechaSeleccionada={setFechaSeleccionada}
-              stars={stars}
-              setStars={setStars}
+      <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-6">
+        {/* Carrito de productos */}
+        <div className="w-full lg:w-2/3">
+          {productos.map((item, index) => (
+            <CheckoutItem
+              key={index}
+              imagen={item.product.url}
+              titulo={item.product.name}
+              cantidad={item.quantity}
+              precio={item.product.price}
+              onCantidadChange={(cantidad) => handleCantidadChange(index, cantidad)}
+              onEliminar={() => handleEliminar(index)}
             />
+          ))}
+        </div>
 
-            <OrderSummary subtotal={subtotal} />
+        {/* Formulario + resumen + pago */}
+        <div className="w-full lg:w-1/3 rounded-lg flex flex-col gap-4 overflow-y-auto">
+          <CheckoutForm
+            tipoEntrega={tipoEntrega}
+            setTipoEntrega={setTipoEntrega}
+            district={district}
+            setDistrict={setDistrict}
+            direccion={direccion}
+            setDireccion={setDireccion}
+            referencia={referencia}
+            setReferencia={setReferencia}
+            celular={celular}
+            setCelular={setCelular}
+            email={email}
+            setEmail={setEmail}
+            fechaSeleccionada={fechaSeleccionada}
+            setFechaSeleccionada={setFechaSeleccionada}
+            stars={stars}
+            setStars={setStars}
+            sede={sede}
+            setSede={setSede}
+            tienda={tienda}
+            setTienda={setTienda}
+          />
 
-            <PaymentMethods
-              onPagar={handlePagar}
-              metodoPago={metodoPago}
-              setMetodoPago={setMetodoPago}
-              onSeguirComprando={handleSeguirComprando} 
+          <OrderSummary
+            subtotal={subtotal}
+            deliveryFee={tipoEntrega === "delivery" ? deliveryFees[district] || 0 : 0}
+          />
 
-            />
-          </div>
+          <PaymentMethods
+            onPagar={handlePagar}
+            metodoPago={metodoPago}
+            setMetodoPago={setMetodoPago}
+            onSeguirComprando={handleSeguirComprando}
+          />
         </div>
       </div>
-    </>
+    </LayoutAuth>
   );
 };
 

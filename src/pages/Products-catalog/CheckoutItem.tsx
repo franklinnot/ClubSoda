@@ -1,6 +1,5 @@
-import { IconTrash } from "../../components/Icons";
+import { IconPlus, IconMinus, IconClose } from "../../components/Icons";
 
-// 1. Tipamos las props
 interface CheckoutItemProps {
   imagen: string;
   titulo: string;
@@ -10,64 +9,74 @@ interface CheckoutItemProps {
   onEliminar: () => void;
 }
 
-// 2. Usamos el tipo en el componente
-const CheckoutItem: React.FC<CheckoutItemProps> = ({ imagen, titulo, cantidad, precio, onCantidadChange, onEliminar }) => {
-
-
+const CheckoutItem: React.FC<CheckoutItemProps> = ({
+  imagen,
+  titulo,
+  cantidad,
+  precio,
+  onCantidadChange,
+  onEliminar,
+}) => {
   const aumentar = () => onCantidadChange(cantidad + 1);
   const disminuir = () => {
     if (cantidad > 1) onCantidadChange(cantidad - 1);
   };
 
-
   return (
+    <div className="relative grid grid-cols-[auto_1fr_auto] items-center bg-white p-4 pr-24 border border-gray-300 rounded-xl gap-4 mb-4 w-full min-h-[80px]">
+      {/* Botón eliminar arriba a la derecha */}
+      <button
+        onClick={onEliminar}
+        className="absolute top-3 right-3 text-gray-400 hover:text-red-600"
+        title="Eliminar producto"
+      >
+        <IconClose size={18} />
+      </button>
 
-    <div className="flex flex-wrap md:flex-nowrap items-center col-span-2 bg-white p-4 border border-gray-400 rounded-lg shadow-md gap-4 mb-4">
+      {/* Imagen */}
       <img
         src={imagen}
         alt={titulo}
-        className="w-24 h-24 object-cover rounded-md border"
+        className="w-16 h-16 object-cover rounded-xl self-center"
       />
 
+      {/* Nombre + precio + control de cantidad en mobile */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between self-center overflow-hidden gap-2">
+        {/* Nombre + precio */}
+        <div className="flex flex-col">
+          <h4 className="font-semibold text-base text-gray-800 truncate">
+            {titulo}
+          </h4>
+          <p className="text-sm text-gray-500">S/. {precio.toFixed(2)}</p>
+        </div>
 
-      <div className="flex-1">
-        <h4 className="font-semibold text-lg">{titulo}</h4>
-        <p className="text-sm text-gray-500">Producto</p>
+        {/* Botones de cantidad*/}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={disminuir}
+            className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300"
+            title="Disminuir cantidad"
+          >
+            <IconMinus className="text-gray-700" size={15} />
+          </button>
+          <span className="text-sm font-medium w-6 text-center">
+            {String(cantidad).padStart(2, "0")}
+          </span>
+          <button
+            onClick={aumentar}
+            className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600"
+            title="Aumentar cantidad"
+          >
+            <IconPlus className="text-white" size={15} />
+          </button>
+        </div>
       </div>
 
-      <div className="flex items-center gap-2 ">
-        <button
-          onClick={aumentar}
-          className="px-2 bg-red-600 text-[12px] font-semibold  text-white rounded-sm"
-        >
-          +
-        </button>
-
-        <span className="text-black text-xl border-gray-400 font-bold border rounded px-4">{cantidad}</span>
-        <button
-          onClick={disminuir}
-          className="px-3 text-[12px]  bg-[#e0e0e0] rounded font-bold"
-        >
-          -
-        </button>
+      {/* Subtotal */}
+      <div className="flex items-center justify-end self-center min-w-[100px]">
+        <p className="text-sm font-bold">S/. {(precio * cantidad).toFixed(2)}</p>
       </div>
-
-      <div className=" text-center font-bold w-20 min-w-[5rem]">
-        <p className="text-sm">S/. {precio.toFixed(2)}</p>
-      </div>
-
-      <div className="text-center font-bold w-20 min-w-[5rem]">
-        <p className="font-bold">S/. {(precio * cantidad).toFixed(2)}</p>
-      </div>
-      <button
-        onClick={onEliminar}
-        className="text-gray-500 hover:text-red-600 text-lg"
-        title="Eliminar producto"
-      >
-        <IconTrash />
-      </button>
     </div>
-
   );
 };
 
