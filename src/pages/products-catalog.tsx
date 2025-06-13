@@ -9,7 +9,7 @@ import type { ISaleDetail } from "../classes/interfaces/isaleDetail";
 
 export default function ProductsCatalog() {
   const [filtroCategorias, setFiltroCategorias] = useState<string[]>([]);
-  const [precioMin, setPrecioMin] = useState(0);
+  const [precioMin, setPrecioMin] = useState(30);
   const [precioMax, setPrecioMax] = useState(300);
   const [cantidades, setCantidades] = useState<{[nombre: string]: number}>({});
 
@@ -41,8 +41,7 @@ export default function ProductsCatalog() {
 
   const productosFiltrados = productos.filter((producto) => {
     const dentroDePrecio = producto.precio >= precioMin && producto.precio <= precioMax;
-    const dentroDeCategoria =
-      filtroCategorias.length === 0 || filtroCategorias.includes(producto.categoria);
+    const dentroDeCategoria = filtroCategorias.length === 0 || filtroCategorias.includes(producto.categoria);
     return dentroDePrecio && dentroDeCategoria;
   });
 

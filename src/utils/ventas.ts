@@ -37,7 +37,4 @@ export function guardarVenta(
     localStorage.setItem("ventas", JSON.stringify(ventasPrevias));
     localStorage.removeItem("carrito");
 
-
-
-
 }
