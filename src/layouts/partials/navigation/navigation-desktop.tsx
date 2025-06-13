@@ -9,7 +9,7 @@ export default function NavigationDesktop() {
     setRoutes(getRoutes() as IRoute[]);
   }, []);
   return (
-    <nav className="hidden md:flex flex-row gap-12 mt-[2px]">
+    <nav className="hidden lg:flex flex-row gap-12 mt-[2px]">
       {routes.map((item: IRoute, index: number) => (
         <Link
           key={index}

@@ -4,3 +4,48 @@
 body {
     font-family: Inter, Arial, Helvetica, sans-serif;
 }
+
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 40s linear infinite;
+}
+
+
+@keyframes animated-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, #ffb9a3, #ffabbd, #ace8ff);
+  background-size: 400% 400%;
+  animation: animated-gradient 8s ease-in-out infinite;
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-infinite {
+  animation: spin 120s linear infinite;
+}

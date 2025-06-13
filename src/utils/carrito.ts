@@ -16,7 +16,7 @@ export function guardarCarrito(detalles: ISaleDetail[]){
 }
 
 export function agregarAlCarrito(producto:IProduct){
-    let carrito = obtenerCarrito();
+    const carrito = obtenerCarrito();
     const existente = carrito.find((item)=>item.product.name === producto.name)
     if(existente){
         existente.quantity +=1;
