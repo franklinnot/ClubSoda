@@ -27,7 +27,7 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({
       {/* Botón eliminar arriba a la derecha */}
       <button
         onClick={onEliminar}
-        className="absolute top-3 right-3 text-gray-400 hover:text-red-600"
+        className="absolute top-3 right-3 text-gray-400 hover:text-red-600 cursor-pointer"
         title="Eliminar producto"
       >
         <IconClose size={18} />

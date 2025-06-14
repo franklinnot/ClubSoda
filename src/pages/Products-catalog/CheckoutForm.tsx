@@ -1,4 +1,3 @@
-import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/InputField";
 import { distritos } from "./data/distritos";
 import ComboBox from "../../components/ComboBox";
@@ -48,6 +47,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   setSede,
   tienda,
   setTienda,
+
+  
 }) => {
   return (
 
@@ -57,26 +58,27 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       </h3>
 
       <div className="flex justify-center">
-        <div className="inline-flex rounded-md border border-gray-300 overflow-hidden">
-          <PrimaryButton
+        <div className="inline-flex rounded-lg overflow-hidden border border-gray-300">
+          <button
             onClick={() => setTipoEntrega("delivery")}
-            className={`rounded-none px-4 py-2 text-sm font-medium transition-all duration-200 ${tipoEntrega === "delivery"
-              ? "bg-gray-800 text-white"
-              : " text-gray-700 hover:bg-gray-100"
+            className={`px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${tipoEntrega === "delivery"
+                ? "bg-gray-800 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
           >
             Delivery
-          </PrimaryButton>
-          <PrimaryButton
+          </button>
+          <button
             onClick={() => setTipoEntrega("recojo")}
-            className={`rounded-none px-4 py-2 text-sm font-medium transition-all duration-200 ${tipoEntrega === "recojo"
-              ? "bg-gray-800 text-white"
-              : " text-gray-700 hover:bg-gray-100"
+            className={`px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${tipoEntrega === "recojo"
+                ? "bg-gray-800 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
           >
             Recojo
-          </PrimaryButton>
+          </button>
         </div>
+
       </div>
 
       {tipoEntrega === "delivery" ? (

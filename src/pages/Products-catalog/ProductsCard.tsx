@@ -90,7 +90,7 @@ const ProductCard: FC<ProductCardProps> = ({
         <PrimaryButton
           onClick={Agregar}
           disabled={cantidad === 0}
-          className={`text-xs font-semibold px-4 py-1 rounded-md ${cantidad === 0
+          className={`text-xs font-semibold px-4 py-1 rounded-md cursor-pointer ${cantidad === 0
             ? "bg-gray-300 cursor-not-allowed"
             : "bg-red-500 hover:bg-red-600 text-white"
             }`}

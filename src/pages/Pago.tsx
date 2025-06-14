@@ -11,6 +11,7 @@ import Toast from "../components/Toast";
 import { useNavigate } from "react-router-dom";
 import LayoutAuth from "../layouts/layout-auth";
 import { deliveryFees } from "./Products-catalog/data/distritos";
+import { IconInformation } from "../components/Icons";
 
 const Pago: React.FC = () => {
   const navigate = useNavigate();
@@ -67,11 +68,6 @@ const Pago: React.FC = () => {
       guardarVenta(tipoEntrega, productos, metodoPago, total, datosEntrega, estado, stars);
     }
 
-    setToast({
-      message: "Compra realizada con éxito",
-      type: "success",
-    });
-
     setTimeout(() => {
       navigate("/products/catalog");
     }, 2000);
@@ -103,6 +99,7 @@ const Pago: React.FC = () => {
         <Toast
           message={toast.message}
           type={toast.type}
+          className="z-50"
         />
       )}
 
@@ -114,18 +111,35 @@ const Pago: React.FC = () => {
       <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-6">
         {/* Carrito de productos */}
         <div className="w-full lg:w-2/3">
-          {productos.map((item, index) => (
-            <CheckoutItem
-              key={index}
-              imagen={item.product.url}
-              titulo={item.product.name}
-              cantidad={item.quantity}
-              precio={item.product.price}
-              onCantidadChange={(cantidad) => handleCantidadChange(index, cantidad)}
-              onEliminar={() => handleEliminar(index)}
-            />
-          ))}
+          {productos.length === 0 ? (
+            <div className="bg-white border border-gray-300 rounded-xl p-6 text-center text-gray-500">
+              <div className="flex items-center justify-center gap-2 mb-4 text-gray-500">
+                <IconInformation className="w-6 h-6 text-gray-400" />
+                <p className="text-lg font-semibold">Tu carrito está vacío</p>
+              </div>
+
+              <button
+                onClick={handleSeguirComprando}
+                className="mt-2 inline-block bg-red-500 text-white px-4 py-2 rounded-md text-sm hover:bg-red-600 transition cursor-pointer"
+              >
+                Comprar ahora
+              </button>
+            </div>
+          ) : (
+            productos.map((item, index) => (
+              <CheckoutItem
+                key={index}
+                imagen={item.product.url}
+                titulo={item.product.name}
+                cantidad={item.quantity}
+                precio={item.product.price}
+                onCantidadChange={(cantidad) => handleCantidadChange(index, cantidad)}
+                onEliminar={() => handleEliminar(index)}
+              />
+            ))
+          )}
         </div>
+
 
         {/* Formulario + resumen + pago */}
         <div className="w-full lg:w-1/3 rounded-lg flex flex-col gap-4 overflow-y-auto">
@@ -162,6 +176,8 @@ const Pago: React.FC = () => {
             metodoPago={metodoPago}
             setMetodoPago={setMetodoPago}
             onSeguirComprando={handleSeguirComprando}
+            setToast={setToast}
+            tieneProductos={productos.length > 0}
           />
         </div>
       </div>
