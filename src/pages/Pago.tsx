@@ -11,6 +11,7 @@ import { Status } from "../classes/enums/status";
 import Toast from "../components/Toast";
 import { useNavigate } from "react-router-dom";
 
+
 const Pago: React.FC = () => {
   const navigate = useNavigate();
 
