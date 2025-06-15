@@ -7,7 +7,7 @@ export default function LandingPage() {
   return (
     <LayoutAuth
       title="Dashboard"
-      className="animated-gradient-bg"
+      className=""
       classNameMain="justify-start items-center gap-8 md:gap-10"
       footer={true}
     >
