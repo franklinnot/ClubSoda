@@ -1,99 +1,91 @@
-import { useState } from "react";
 import LayoutAuth from "../../layouts/layout-auth";
-import InputField from "../../components/InputField";
-import ComboBox from "../../components/ComboBox";
-import InputLabel from "../../components/InputLabel";
-import Button from "../../components/button";
+import img1 from "../../assets/dashboard/1.png";
+import img2 from "../../assets/dashboard/2.png";
+import { productos } from "../Products-catalog/data/productos";
+import ProductGridSection from "./product-grid";
+import LargePromoBanner from "./banner";
+
+export interface Product {
+  id: string;
+  nombre: string;
+  precio: number;
+  categoria: string[];
+  imagen: string;
+  descripcion: string;
+  oldPrice?: number;
+}
 
 export default function Dashboard() {
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    category: {} as IItem | null,
-    description: "",
+  const productosWithOffers: Product[] = productos.map((p) => {
+    if (p.id === "KJ5364") return { ...p, oldPrice: 5.5 };
+    if (p.id === "F349J") return { ...p, oldPrice: 59.99 };
+    return p;
   });
 
-  interface IItem {
-    id: string;
-    name: string;
-  }
-
-  const submit = () => {
-    alert("Enviando consulta...");
-  };
-
-  const category_types: IItem[] = [
-    { id: "1", name: "Estado de mi pedido" },
-    { id: "2", name: "Problemas con el pago" },
-    { id: "6", name: "Devoluciones o cambios" },
-    { id: "8", name: "Reclamos o quejas" },
-    { id: "9", name: "Otros" },
-  ];
+  const newArrivals = productosWithOffers.slice(0, 6);
+  const bestSellers = productosWithOffers
+    .filter((p) =>
+      ["Galletas", "Pastas"].some((cat) => p.categoria.includes(cat))
+    )
+    .slice(0, 6);
+  const specialOffers = productosWithOffers
+    .filter((p) => p.oldPrice !== undefined)
+    .slice(0, 6);
+  const wafersProducts = productosWithOffers
+    .filter((p) => p.categoria.includes("Wafers"))
+    .slice(0, 6);
 
   return (
-    <LayoutAuth
-      title="Nueva consulta"
-      className="pb-10 sm:pb-12 md:pb-14 lg:pb-16"
-    >
-      <div
-        className="flex flex-col px-7 gap-5 sm:gap-6 md:gap-7 lg:gap-8 divide-y divide-gray-300"
-        onSubmit={submit}
-      >
-        {/* Titulo y descripcion */}
-        <div className="pb-5 sm:pb-5 md:pb-6 lg:pb-7">
-          <h1 className="text-2xl font-semibold text-slate-800">
-            Nueva consulta
-          </h1>
-          <p className="text-sm font-medium text-slate-600">
-            Completa el formulario y te contactaremos en menos de 24 horas.
-          </p>
-        </div>
-        {/* entradas */}
-        <form className="flex flex-col gap-4 sm:gap-5 md:gap-6 lg:gap-7">
-          {/* nombre, correo y categoria */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-6 lg:gap-7">
-            {/* nombre */}
-            <InputField
-              id="name"
-              label="Nombre"
-              value={data.name}
-              onChange={(e) => setData({ ...data, name: e.target.value })}
-            />
-            {/* correo */}
-            <InputField
-              id="email"
-              label="Correo"
-              type="email"
-              value={data.email}
-              onChange={(e) => setData({ ...data, email: e.target.value })}
-            />
-            {/* categoria */}
-            <ComboBox
-              id="doctype"
-              label="Categoría"
-              value={data.category}
-              items={category_types}
-              onChange={(item) => item && setData({ ...data, category: item })}
-            ></ComboBox>
-          </div>
+    <LayoutAuth title="Tienda Online" className="bg-gray-50" footer={true}>
+      <div className="container mx-auto px-4 py-8">
+        <LargePromoBanner
+          imageUrl={img1}
+          title="¡Sabor Tradicional, Precios Irresistibles!"
+          description="Descubre la calidad y frescura que nos caracteriza en cada bocado."
+          linkText="Ver Productos Destacados"
+          linkHref="/products/catalog"
+          backgroundColor="bg-amber-600"
+        />
 
-          {/* descripcion */}
-          <div>
-            <InputLabel htmlFor="description" value="Descripción" />
-            <textarea
-              id="description"
-              name="description"
-              className={`w-full px-3 py-2 resize-none border border-gray-300 
-                        rounded-md text-sm transition-all duration-200 
-                      placeholder-[#979797] focus:outline-none focus:ring-1 
-                      focus:ring-[#CDCDCD] focus:border-[#CDCDCD] max-h-[120px]
-                        ${data.description ? "bg-blue-50" : ""}`}
-            />
-          </div>
+        <ProductGridSection
+          title="Ofertas Exclusivas para ti"
+          products={specialOffers}
+          linkText="Ver todas las ofertas"
+          linkHref="/productos?categoria=ofertas"
+          className="bg-white p-6 rounded-lg shadow-md mb-10"
+        />
 
-          {/* boton */}
-          <Button className="px-10">Enviar</Button>
-        </form>
+        <LargePromoBanner
+          imageUrl={img2}
+          title="Panes Frescos, Directo a tu Mesa"
+          description="Desde el clásico francés hasta nuestras especialidades artesanales. ¡Recién horneados!"
+          linkText="Explorar Panes"
+          linkHref="/productos?categoria=panes"
+          backgroundColor="bg-green-700"
+        />
+
+        <ProductGridSection
+          title="Novedades Recientes"
+          products={newArrivals}
+          linkText="Ver todas las novedades"
+          linkHref="/productos?sort=novedades"
+        />
+
+        <ProductGridSection
+          title="Los Favoritos de San Jorge"
+          products={bestSellers}
+          linkText="Ver los más vendidos"
+          linkHref="/productos?sort=mas-vendidos"
+        />
+
+        {wafersProducts.length > 0 && (
+          <ProductGridSection
+            title="Wafers Crujientes y Deliciosos"
+            products={wafersProducts}
+            linkText="Descubre nuestros Wafers"
+            linkHref="/productos?categoria=Wafers"
+          />
+        )}
       </div>
     </LayoutAuth>
   );
