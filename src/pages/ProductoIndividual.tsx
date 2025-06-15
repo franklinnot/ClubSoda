@@ -32,7 +32,8 @@ const ProductoIndividual = () => {
             <div className="justify-center items-center max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row gap-10">
 
                 {/* IMAGEN - IZQUIERDA */}
-                <div className="mt-0 w-full md:w-3/7 flex flex-col items-center">
+                <div className=" w-full md:w-3/7 flex flex-col items-center">
+
                     {/* Nombre */}
                     <h1 className="mx-auto md:mx-0 justify-center text-2xl font-semibold text-red-500 mt-s mb-4">{producto.nombre}</h1>
                     <img
@@ -49,11 +50,15 @@ const ProductoIndividual = () => {
                                 className="w-16 h-16 object-cover border border-gray-400 shadow-lg rounded hover:ring-2 hover:ring-red-500 cursor-pointer transition-shadow duration-300"
                             />
                         ))}
+
+
                     </div>
+
                 </div>
 
                 {/* CONTENIDO DE LA DERECHA */}
-                <div className="  w-full md:w-1/3 flex flex-col justify-start space-y-12">
+                <div className="w-full md:w-2/3 flex flex-col justify-start space-y-12">
+
 
                     {/* Bloque sku y rating */}
                     <div className="shadow-lg mx-auto md:mx-0 justify-center w-max  p-1  flex items-center gap-30">
@@ -69,6 +74,7 @@ const ProductoIndividual = () => {
                                 <IconStar className="text-gray-300 w-5 h-5" fill="currentColor" />
                             </div>
                         </div>
+
                     </div>
 
 
@@ -87,6 +93,7 @@ const ProductoIndividual = () => {
 
                     </div>
 
+
                     {/* Botón y precio */}
                     <div className="mx-auto md:mx-0 justify-center w-max shadow-lg rounded-lg p-4  flex items-center gap-6">
                         <PrimaryButton
@@ -96,21 +103,26 @@ const ProductoIndividual = () => {
                             Agregar al carrito
                         </PrimaryButton>
                         <p className=" mx-auto md:mx-0 px-8 text-black text-sm font-semibold">S/. {producto.precio}</p>
+
                     </div>
+
+
 
 
 
                 </div>
 
+                <div className="gap-2 flex justify-end ">
+                    <CarruselProductos />
+                </div>
 
             </div>
 
-            <div className="flex-columns flex justify-center items-center  text-sm text-gray-600">
-                MAS PRODUCTOS...
-            </div>                
-            <CarruselProductos />
+
+
 
         </>
+
     )
 
 
