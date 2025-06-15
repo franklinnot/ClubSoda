@@ -6,6 +6,7 @@ import { agregarProductoAlCarrito } from "../../utils/carrito";
 import type { ISaleDetail } from "../../classes/interfaces/isaleDetail";
 import LayoutAuth from "../../layouts/layout-auth";
 import { productos } from "./data/productos";
+import { Link } from "react-router-dom";
 
 
 export default function ProductsCatalog() {
@@ -47,7 +48,7 @@ export default function ProductsCatalog() {
 
   return (
     <LayoutAuth title="Catálogo de Productos">
-      <div className="w-full max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-4">
+      <div className=" w-full max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-4">
         {/* Sidebar */}
         <div className="w-full md:w-[280px] md:shrink-0">
           <SidebarFiltros
@@ -63,8 +64,11 @@ export default function ProductsCatalog() {
         <div className="flex-1 overflow-y-auto pr-2">
           <div className="grid gap-4 place-items-center grid-cols-[repeat(auto-fit,minmax(200px,1fr))] max-w-screen-lg mx-auto">
             {productosFiltrados.map((p, index) => (
-              <ProductCard
+            
+                
+               <ProductCard
                 key={index}
+                id={p.id}
                 nombre={p.nombre}
                 precio={p.precio}
                 cantidad={getCantidad(p.nombre)}
@@ -72,6 +76,7 @@ export default function ProductsCatalog() {
                 Disminuir={() => disminuirCantidad(p.nombre)}
                 imagen={p.imagen}
                 Agregar={() => {
+                  
                   const cantidad = getCantidad(p.nombre);
                   const nuevoProducto: ISaleDetail = {
                     product: new Product({ name: p.nombre, price: p.precio, url: p.imagen }),
@@ -82,6 +87,10 @@ export default function ProductsCatalog() {
                   alert("Producto agregado al carrito");
                 }}
               />
+              
+              
+              
+             
             ))}
           </div>
         </div>

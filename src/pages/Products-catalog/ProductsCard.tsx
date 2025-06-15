@@ -3,8 +3,10 @@ import type { FC } from "react";
 import PrimaryButton from "../../components/PrimaryButton";
 import { motion } from "framer-motion";
 import { IconHeart, IconPlus, IconMinus } from "../../components/Icons";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
+  id: string
   nombre: string;
   precio: number;
   cantidad: number;
@@ -15,6 +17,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({
+  id,
   nombre,
   precio,
   cantidad,
@@ -50,9 +53,9 @@ const ProductCard: FC<ProductCardProps> = ({
       </div>
 
       {/* Imagen */}
-      <div className="w-full h-[140px] px-4 pt-2 pb-1">
+      <Link to={`/producto/${id}`} className="w-full h-[140px] px-4 pt-2 pb-1">
         <img src={imagen} alt={nombre} className="w-full h-full object-contain" />
-      </div>
+      </Link>
 
       {/* Nombre y precio */}
       <div className="flex justify-between items-start px-3 pt-1">

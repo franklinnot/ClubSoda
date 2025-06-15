@@ -10,6 +10,7 @@ import RequestNew from "./pages/requests/request-new";
 import RequestHistory from "./pages/requests/request-history/request-history";
 import Pago from "./pages/Pago";
 import "./App.css";
+import ProductoIndividual from "./pages/ProductoIndividual";
 
 export default function App() {
   return (
@@ -24,7 +25,9 @@ export default function App() {
         <Route path="/purchase/history" element={<PurchaseHistory />} />
         <Route path="/request/new" element={<RequestNew />} />
         <Route path="/request/history" element={<RequestHistory />} />
-        <Route path="/pago" element={<Pago />} />
+        <Route path="/pago" element={<Pago />}/>
+        <Route path="/productoindividual" element={<ProductoIndividual/>}/>
+        <Route path="/producto/:id" element={<ProductoIndividual />} />
       </Routes>
     </BrowserRouter>
   );

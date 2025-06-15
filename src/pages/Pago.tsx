@@ -13,6 +13,7 @@ import LayoutAuth from "../layouts/layout-auth";
 import { deliveryFees } from "./Products-catalog/data/distritos";
 import { IconInformation } from "../components/Icons";
 
+
 const Pago: React.FC = () => {
   const navigate = useNavigate();
   const estado = Status.PROGRESO;
