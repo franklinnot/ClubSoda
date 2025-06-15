@@ -19,8 +19,8 @@ const estadoColors: Record<string, string> = {
 };
 
 const estadoIcons: Record<string, JSX.Element> = {
-    "En progreso": <IconClock className="text-yellow-500 w-4 h-4" />,
-    "Finalizado": <IconCheckCircle className="text-green-500 w-4 h-4" />,
+    "En progreso": <IconClock size={20} className="text-yellow-500 w-4 h-4" />,
+    "Finalizado": <IconCheckCircle size={20} className="text-green-500 w-4 h-4" />,
 };
 
 export default function RequestDetail({

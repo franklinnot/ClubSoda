@@ -3,7 +3,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import LandingPage from "./pages/landing-page/landing-page";
 import Register from "./pages/register";
 import Login from "./pages/login";
-import ProductsCatalog from "./pages/products-catalog";
+import ProductsCatalog from "./pages/Products-catalog/products-catalog";
 import PurchaseNew from "./pages/purchases/purchase-new";
 import PurchaseHistory from "./pages/purchases/purchase-history/purchase-history";
 import RequestNew from "./pages/requests/request-new";
