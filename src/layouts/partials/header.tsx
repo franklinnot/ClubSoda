@@ -24,7 +24,7 @@ export default function Header({ user, title, className = "" }: IHeaderProps) {
         <NavigationMobile className="inline-flex lg:hidden" />
 
         {/* Application logo */}
-        <Link className="hidden sm:inline-flex ml-1 mt-0.5" to="dashboard">
+        <Link className="hidden sm:inline-flex ml-1 mt-0.5" to="/">
           <ApplicationLogo className="w-[96px]" />
         </Link>
       </div>
