@@ -112,7 +112,7 @@ const ProductoIndividual = () => {
 
                 </div>
 
-                <div className="gap-2 flex justify-end ">
+                <div className=" flex justify-end ">
                     <CarruselProductos />
                 </div>
 
