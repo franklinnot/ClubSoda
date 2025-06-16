@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard/dashboard";
+import LandingPage from "./pages/landing-page/landing-page";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import ProductsCatalog from "./pages/Products-catalog/products-catalog";
@@ -16,6 +17,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/us" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products/catalog" element={<ProductsCatalog />} />
@@ -26,7 +28,6 @@ export default function App() {
         <Route path="/pago" element={<Pago />}/>
         <Route path="/productoindividual" element={<ProductoIndividual/>}/>
         <Route path="/producto/:id" element={<ProductoIndividual />} />
-
       </Routes>
     </BrowserRouter>
   );

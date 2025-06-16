@@ -5,7 +5,7 @@ import ComboBox from "../../components/ComboBox";
 import InputLabel from "../../components/InputLabel";
 import Button from "../../components/button";
 
-export default function Dashboard() {
+export default function RequestNew() {
   const [data, setData] = useState({
     name: "",
     email: "",

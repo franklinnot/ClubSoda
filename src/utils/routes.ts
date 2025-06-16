@@ -1,13 +1,10 @@
 
 const routes = [
-  { title: "Dashboard", route: "/" },
+  { title: "Inicio", route: "/" },
+  { title: "Nosotros", route: "/us" },
   { title: "Productos", route: "/products/catalog" },
-  { title: "Favoritos", route: "/favorites" },
   { title: "Compras", route: "/purchase/history" },
   { title: "Consultas", route: "/request/history" },
-  { tittle: "Pago", route: "/Pago"},
-  { tittle: "ProductoIndivual", route: "/ProductoIndividual"},
-
 ];
 
 export default function getRoutes(){

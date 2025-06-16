@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import img1 from "../../assets/dashboard/1.png";
 import img2 from "../../assets/dashboard/2.png";
 import img3 from "../../assets/dashboard/3.png";
@@ -21,7 +23,7 @@ const carouselItems: CarouselItem[] = [
   {
     image: img2,
     title: "Controla tus compras",
-    description: "Visualiza tus pedidos.",
+    description: "Visualiza tus pedidos y su estado en todo momento.",
   },
   {
     image: img3,
@@ -103,9 +105,15 @@ export default function Carousel() {
             <h2 className="font-bold text-3xl">{item.title}</h2>
 
             {/* descripcion */}
-            <p className="text-base text-white opacity-90 mt-0.5">
+            <p className="text-base text-white opacity-90 mt-0.5 pb-2.5">
               {item.description}
             </p>
+            <Link
+              to="/products/catalog"
+              className="inline-flex items-center text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md font-semibold transition-colors duration-200"
+            >
+              Ver Productos <ArrowRight className="w-5 h-5 ml-1" />
+            </Link>
           </div>
         </div>
       ))}
