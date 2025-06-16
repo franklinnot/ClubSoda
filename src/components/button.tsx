@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 interface IProps {
   className?: string;
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
   children?: React.ReactNode;
 }
 
@@ -11,6 +12,7 @@ export default function Button({
   className = "",
   disabled,
   children,
+  type,
   ...props
 }: IProps) {
   const baseClasses = `inline-flex justify-center items-center px-4 py-2 
@@ -23,6 +25,7 @@ export default function Button({
 
   return (
     <button
+      type={type || "button"}
       className={twMerge(baseClasses, disabledClasses, className)}
       disabled={disabled}
       {...props}

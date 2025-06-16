@@ -6,10 +6,10 @@ import ApplicationLogo from "../../components/ApplicationLogo";
 import InputSearch from "../../components/input-search";
 import { IconShoppingBag } from "../../components/Icons";
 import Button from "../../components/button";
-import type { IUser } from "../../utils/interfaces/IUser";
+import type { IUser } from "../../classes/interfaces/iuser";
 
 interface IHeaderProps {
-  user?: IUser;
+  user: IUser;
   title: string;
   className?: string;
 }
@@ -48,18 +48,13 @@ export default function Header({ user, title, className = "" }: IHeaderProps) {
 
       <div className="flex flex-row justify-self-end items-center gap-4 mt-1">
         <Link to="/pago">
-        <Button className="p-1.5 rounded-full bg-transparent hover:bg-indigo-50 focus:bg-indigo-50">
-          <IconShoppingBag size={24} className="text-slate-700" />
-        </Button>
+          <Button className="p-1.5 rounded-full bg-transparent hover:bg-indigo-50 focus:bg-indigo-50">
+            <IconShoppingBag size={24} className="text-slate-700" />
+          </Button>
         </Link>
-        
+
         <ProfileMenu user={user} />
       </div>
-      
-      
-      
-     
-      
     </header>
   );
 }
