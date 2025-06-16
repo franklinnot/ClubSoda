@@ -1,9 +1,12 @@
+// src/pages/Auth/Register.tsx
 import { useState } from "react";
 import { IconClose } from "../../components/Icons";
 import InputField from "../../components/InputField";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/button";
 import ComboBox from "../../components/ComboBox";
+import { useAuth } from "../../AuthContext"; // Importa el hook de autenticación
+import type { IUser } from "../../classes/interfaces/iuser"; // Importa la interfaz de usuario
 
 interface IItem {
   id: string;
@@ -16,6 +19,10 @@ type RegisterProps = {
 };
 
 export default function Register({ onClose, onSwitch }: RegisterProps) {
+  const { register } = useAuth(); // Usa el hook para acceder a la función register
+  const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
+
   const [data, setData] = useState({
     name: "",
     lastname: "",
@@ -28,17 +35,56 @@ export default function Register({ onClose, onSwitch }: RegisterProps) {
     accept_terms: false,
   });
 
-  const [processing, setProcessing] = useState(false);
   const doctypes = [
     { id: "1", name: "DNI" },
     { id: "2", name: "Pasaporte" },
     { id: "3", name: "Carné de extranjería" },
   ];
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setProcessing(true);
-    alert("Registro enviado");
+    setError(null); // Resetea errores anteriores
+
+    // Validaciones básicas antes de enviar
+    if (data.password !== data.password_confirmation) {
+      setError("Las contraseñas no coinciden.");
+      setProcessing(false);
+      return;
+    }
+    if (!data.accept_terms) {
+      setError("Debes aceptar los términos y condiciones.");
+      setProcessing(false);
+      return;
+    }
+    if (!data.doctype || !data.doctype.name) {
+      // Asegúrate de que doctype tenga un nombre válido
+      setError("Por favor selecciona un tipo de documento.");
+      setProcessing(false);
+      return;
+    }
+
+    const newUser: IUser = {
+      name: data.name,
+      lastname: data.lastname,
+      doctype: data.doctype.name, // Asegúrate de pasar solo el nombre
+      doc_num: data.doc_num,
+      phone: data.phone,
+      email: data.email,
+      password: data.password,
+    };
+
+    const success = await register(newUser);
+
+    if (success) {
+      alert("¡Registro exitoso! Has iniciado sesión automáticamente.");
+      onClose(); // Cierra el modal o redirige
+    } else {
+      setError(
+        "El correo electrónico ya está registrado o hubo un error en el registro."
+      );
+    }
+
     setProcessing(false);
   };
 
@@ -128,7 +174,8 @@ export default function Register({ onClose, onSwitch }: RegisterProps) {
               }
             />
           </div>
-
+          {error && <p className="text-red-500 text-sm">{error}</p>}{" "}
+          {/* Muestra el error */}
           <div>
             <label className="flex items-center">
               <Checkbox
@@ -145,8 +192,9 @@ export default function Register({ onClose, onSwitch }: RegisterProps) {
               </span>
             </label>
           </div>
-
-          <Button>Registrarme</Button>
+          <Button type="submit" disabled={processing}>
+            Registrarme
+          </Button>
         </form>
 
         {/* Cambio a login */}

@@ -1,19 +1,28 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import { IconProfile, ArrowDown } from "../../components/Icons";
-import type { IUser } from "../../classes/interfaces/iuser";
 import Auth from "../../pages/auth/auth";
+import { useAuth } from "../../AuthContext";
 
-export default function ProfileMenu({ user }: { user: IUser }) {
+export default function ProfileMenu() {
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
-  const [showModal, setModal] = useState(false); // estado de visibilidad del modal
+  const menuRef = useRef<HTMLDivElement>(null); 
+  const [showModal, setModal] = useState(false);
 
   const loginComponent = () => {
     setModal(true);
   };
 
-  // Close menu if clicked outside
+  const handleLogout = () => {
+    logout(); 
+    setMenuOpen(false); 
+    setModal(false); 
+    navigate("/"); 
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const menuProfile = document.getElementById("menu-profile");
@@ -33,7 +42,7 @@ export default function ProfileMenu({ user }: { user: IUser }) {
 
   return (
     <>
-      {showModal  && (
+      {showModal && (
         <Auth
           onClose={() => {
             setModal(false);
@@ -47,7 +56,7 @@ export default function ProfileMenu({ user }: { user: IUser }) {
       >
         {/* Nombre del usuario */}
         <div className="hidden lg:block text-gray-600 text-sm">
-          {user ? (
+          {isAuthenticated && user ? (
             <span>{user.name}</span>
           ) : (
             <button
@@ -60,7 +69,7 @@ export default function ProfileMenu({ user }: { user: IUser }) {
         </div>
 
         {/* Contenedor del ícono de perfil y la flechita */}
-        {user ? (
+        {isAuthenticated && user ? ( 
           <div
             id="menu-profile"
             className="relative cursor-pointer"
@@ -81,24 +90,32 @@ export default function ProfileMenu({ user }: { user: IUser }) {
         )}
 
         {/* Menú desplegable */}
-        <div
-          className={`absolute top-[3.4rem] right-[-8px] w-[8rem] bg-indigo-50
-                    transition-all duration-150 z-50 shadow-md rounded-lg transform ${
-                      menuOpen
-                        ? "translate-x-0 opacity-100"
-                        : "translate-x-4 opacity-0"
-                    }`}
-          style={{ pointerEvents: menuOpen ? "auto" : "none" }}
-        >
-          <ul>
-            <li className="px-4 py-2 hover:bg-indigo-100 border-b border-gray-300 text-gray-700 text-sm font-normal text-left rounded-t-lg">
-              <Link to="/profile">Perfil</Link>
-            </li>
-            <li className="px-4 py-2 hover:bg-indigo-100 text-sm font-normal text-left text-red-500 rounded-b-lg">
-              <Link to="/logout">Cerrar sesión</Link>
-            </li>
-          </ul>
-        </div>
+        {isAuthenticated && ( 
+          <div
+            className={`absolute top-[3.4rem] right-[-8px] w-[8rem] bg-indigo-50
+                      transition-all duration-150 z-50 shadow-md rounded-lg transform ${
+                        menuOpen
+                          ? "translate-x-0 opacity-100"
+                          : "translate-x-4 opacity-0"
+                      }`}
+            style={{ pointerEvents: menuOpen ? "auto" : "none" }}
+          >
+            <ul>
+              <li className="px-4 py-2 hover:bg-indigo-100 border-b border-gray-300 text-gray-700 text-sm font-normal text-left rounded-t-lg">
+                <Link to="/profile" onClick={() => setMenuOpen(false)}>
+                  Perfil
+                </Link>{" "}
+                {/* Cierra el menú al hacer clic */}
+              </li>
+              <li className="px-4 py-2 hover:bg-indigo-100 text-sm font-normal text-left text-red-500 rounded-b-lg">
+                {/* Llama a la función handleLogout */}
+                <button onClick={handleLogout} className="w-full text-left">
+                  Cerrar sesión
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </>
   );

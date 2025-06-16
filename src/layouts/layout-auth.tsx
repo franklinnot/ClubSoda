@@ -11,7 +11,6 @@ export default function LayoutAuth({
   className = "",
   classNameMain = "",
   title,
-  user,
   footer = false,
 }: ILayoutProps) {
   useEffect(() => {
@@ -24,7 +23,7 @@ export default function LayoutAuth({
         className
       )}
     >
-      <Header title={title} user={user} className="" />
+      <Header title={title} className="" />
       <main
         className={twMerge(
           `flex flex-col flex-1 justify-center items-center`,
