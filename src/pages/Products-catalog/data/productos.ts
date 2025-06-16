@@ -33,4 +33,31 @@ export const productos = [
         descripcion: "Caja de chiki wafer fiesta 8 bolsones x caja de sabores surtidos (vainilla, chocolate, fresa y limón) "
 
     },
+    {
+        id:"FE435T",
+        nombre: "Caja de Chiki Wafer Fiesta",
+        precio: 53.00,
+        categoria: ["Wafers", "Venta por Caja"],
+        imagen: "https://d20f60vzbd93dl.cloudfront.net/uploads/tienda_010715/tienda_010715_7cb5dacf486695874f59ebb55eb9263fd9888f35_producto_medium_100.webp",
+        descripcion: "Caja de chiki wafer fiesta 8 bolsones x caja de sabores surtidos (vainilla, chocolate, fresa y limón) "
+
+    },{
+        id:"FE435T",
+        nombre: "Caja de Chiki Wafer Fiesta",
+        precio: 53.00,
+        categoria: ["Wafers", "Venta por Caja"],
+        imagen: "https://d20f60vzbd93dl.cloudfront.net/uploads/tienda_010715/tienda_010715_7cb5dacf486695874f59ebb55eb9263fd9888f35_producto_medium_100.webp",
+        descripcion: "Caja de chiki wafer fiesta 8 bolsones x caja de sabores surtidos (vainilla, chocolate, fresa y limón) "
+
+    },{
+        id:"FE435T",
+        nombre: "Caja de Chiki Wafer Fiesta",
+        precio: 53.00,
+        categoria: ["Wafers", "Venta por Caja"],
+        imagen: "https://d20f60vzbd93dl.cloudfront.net/uploads/tienda_010715/tienda_010715_7cb5dacf486695874f59ebb55eb9263fd9888f35_producto_medium_100.webp",
+        descripcion: "Caja de chiki wafer fiesta 8 bolsones x caja de sabores surtidos (vainilla, chocolate, fresa y limón) "
+
+    },
+
+
 ];

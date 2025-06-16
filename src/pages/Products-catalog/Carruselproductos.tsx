@@ -3,7 +3,7 @@ import { productos } from "./data/productos";
 
 const CarruselProductos = () => {
   return (
-    <div className="flex w-full justify-start">
+    <div className="flex  justify-start">
       <div className="py-1 flex-row gap-4 sm:gap-6 lg:gap-8 ml-auto">
         <div className="text-center text-sm text-gray-600 mt-10">
           MAS PRODUCTOS...
