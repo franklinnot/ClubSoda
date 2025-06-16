@@ -6,15 +6,13 @@ import ApplicationLogo from "../../components/ApplicationLogo";
 import InputSearch from "../../components/input-search";
 import { IconShoppingBag } from "../../components/Icons";
 import Button from "../../components/button";
-import type { IUser } from "../../classes/interfaces/iuser";
 
 interface IHeaderProps {
-  user: IUser;
   title: string;
   className?: string;
 }
 
-export default function Header({ user, title, className = "" }: IHeaderProps) {
+export default function Header({ title, className = "" }: IHeaderProps) {
   return (
     <header
       className={`bg-white sticky shrink-0 top-0 z-30 grid grid-flow-col place-items-center px-5 lg:px-6 h-14 sm:max-h-16 border-b border-gray-300 ${className}`}
@@ -53,7 +51,7 @@ export default function Header({ user, title, className = "" }: IHeaderProps) {
           </Button>
         </Link>
 
-        <ProfileMenu user={user} />
+        <ProfileMenu />
       </div>
     </header>
   );

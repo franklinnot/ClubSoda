@@ -9,22 +9,25 @@ import RequestHistory from "./pages/requests/request-history/request-history";
 import Pago from "./pages/Pago";
 import "./App.css";
 import ProductoIndividual from "./pages/ProductoIndividual";
+import { AuthProvider } from "./AuthContext";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/us" element={<LandingPage />} />
-        <Route path="/products/catalog" element={<ProductsCatalog />} />
-        <Route path="/purchase/new" element={<PurchaseNew />} />
-        <Route path="/purchase/history" element={<PurchaseHistory />} />
-        <Route path="/request/new" element={<RequestNew />} />
-        <Route path="/request/history" element={<RequestHistory />} />
-        <Route path="/pago" element={<Pago />}/>
-        <Route path="/productoindividual" element={<ProductoIndividual/>}/>
-        <Route path="/producto/:id" element={<ProductoIndividual />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/us" element={<LandingPage />} />
+          <Route path="/products/catalog" element={<ProductsCatalog />} />
+          <Route path="/purchase/new" element={<PurchaseNew />} />
+          <Route path="/purchase/history" element={<PurchaseHistory />} />
+          <Route path="/request/new" element={<RequestNew />} />
+          <Route path="/request/history" element={<RequestHistory />} />
+          <Route path="/pago" element={<Pago />} />
+          <Route path="/productoindividual" element={<ProductoIndividual />} />
+          <Route path="/producto/:id" element={<ProductoIndividual />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
