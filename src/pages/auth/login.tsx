@@ -56,10 +56,8 @@ export default function Login({ onClose, onSwitch }: LoginProps) {
           <form className="flex flex-col gap-6" onSubmit={submit}>
             <InputField
               id="email"
+              type="email"
               label="Correo"
-              inputMode="numeric"
-              maxLength={8}
-              pattern="[0-9]{8}"
               value={data.email}
               autoComplete="username"
               isFocused={true}
