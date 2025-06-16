@@ -1,4 +1,4 @@
-import type { IUser } from "./interfaces/isuer";
+import type { IUser } from "./interfaces/iuser";
 
 export class User implements IUser {
   name: string;
