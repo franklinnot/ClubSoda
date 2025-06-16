@@ -16,7 +16,7 @@ export default function Auth({ onClose }: AuthProps) {
   return (
     <>
       {/* Fondo difuminado */}
-      <div className="fixed inset-0 z-40 bg-slate-500/50 backdrop-blur-sm" />
+      <div className="fixed inset-0 z-40 bg-gray-500/60 backdrop-blur-sm" />
 
       {/* Contenedor del modal (centra contenido) */}
       <div className="fixed inset-0 z-50 flex items-center justify-center">

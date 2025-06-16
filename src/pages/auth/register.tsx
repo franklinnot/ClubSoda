@@ -10,12 +10,6 @@ interface IItem {
   name: string;
 }
 
-const doctypes: IItem[] = [
-  { id: "1", name: "DNI" },
-  { id: "2", name: "Pasaporte" },
-  { id: "3", name: "Carné de extranjería" },
-];
-
 type RegisterProps = {
   onClose: () => void;
   onSwitch: () => void;
@@ -35,6 +29,11 @@ export default function Register({ onClose, onSwitch }: RegisterProps) {
   });
 
   const [processing, setProcessing] = useState(false);
+  const doctypes = [
+    { id: "1", name: "DNI" },
+    { id: "2", name: "Pasaporte" },
+    { id: "3", name: "Carné de extranjería" },
+  ];
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
